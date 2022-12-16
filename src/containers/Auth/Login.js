@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleLogin } from "../../services/userService";
 import * as actions from "../../store/actions";
-import { userLoginSuccess } from "../../store/actions";
 // import { userLoginSuccess } from "../../store/actions";
 import "./Login.scss";
 class Login extends Component {

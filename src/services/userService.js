@@ -5,4 +5,7 @@ const handleLogin = (email, password) => {
     password,
   });
 };
-export { handleLogin };
+const handleGetAllUser = () => {
+  return axios.get("api/v1/user/all");
+};
+export { handleLogin, handleGetAllUser };
