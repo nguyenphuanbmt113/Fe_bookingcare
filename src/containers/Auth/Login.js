@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleLogin } from "../../services/userService";
 import * as actions from "../../store/actions";
+import { userLoginSuccess } from "../../store/actions";
 // import { userLoginSuccess } from "../../store/actions";
 import "./Login.scss";
 class Login extends Component {
@@ -36,7 +37,7 @@ class Login extends Component {
           errorMess: res.data.EM,
         });
       } else {
-        // userLoginSuccess(res.data.DT);
+        this.props.userLoginSuccess(res.data.DT);
       }
     } catch (error) {
       this.setState({
@@ -105,11 +106,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    adminLoginSuccess: (adminInfo) =>
-      dispatch(actions.adminLoginSuccess(adminInfo)),
-    adminLoginFail: () => dispatch(actions.adminLoginFail()),
-    // userLoginSuccess: (userInfor) =>
-    //   dispatch(actions.userLoginSuccess(userInfor)),
+    // adminLoginSuccess: (adminInfo) =>
+    //   dispatch(actions.adminLoginSuccess(adminInfo)),
+    // userLoginFail: () => dispatch(actions.adminLoginFail()),
+    userLoginSuccess: (userInfo) =>
+      dispatch(actions.userLoginSuccess(userInfo)),
   };
 };
 
