@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleGetAllUser } from "../../services/userService";
+import ModalUser from "./ModalUser";
 import "./usermanage.scss";
+
 class UserManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userData: [],
+      showmodalcreate: false,
     };
   }
   async componentDidMount() {
@@ -19,10 +22,24 @@ class UserManage extends Component {
     }
     console.log("userData", this.state.userData);
   }
+  //handle add new user
+  handleAddNewUser = () => {
+    this.setState({
+      showmodalcreate: true,
+    });
+  };
+  toggleUserModal = () => {
+    this.setState({
+      showmodalcreate: !this.state.showmodalcreate,
+    });
+  };
   render() {
     let userData = this.state.userData;
     return (
       <div className="user-container ">
+        <div className="btn-create" onClick={() => this.handleAddNewUser()}>
+          Create User
+        </div>
         <div className="title text-center mb-3">Magane User</div>
         <table className="table table-bordered table-hover">
           <thead className="thead-light">
@@ -60,6 +77,9 @@ class UserManage extends Component {
               })}
           </tbody>
         </table>
+        <ModalUser
+          isOpen={this.state.showmodalcreate}
+          toggle={this.toggleUserModal}></ModalUser>
       </div>
     );
   }

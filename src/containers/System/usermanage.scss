@@ -12,6 +12,13 @@
     align-items: center;
     gap: 10px;
   }
+  .btn-create {
+    padding: 5px 10px;
+    background: rgb(0, 153, 255);
+    border-radius: 5px;
+    display: inline-block;
+    color: white;
+  }
 }
 .bg-red {
   background: rgb(255, 81, 0);
@@ -20,6 +27,6 @@
 }
 .bg-blue {
   background: rgb(0, 153, 255);
-   border: 0;
+  border: 0;
   color: white;
 }
