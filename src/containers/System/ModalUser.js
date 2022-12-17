@@ -50,6 +50,7 @@ class ModalUser extends Component {
       });
     }
   };
+  //validation
   checkValidation = () => {
     let arrInput = [
       "email",

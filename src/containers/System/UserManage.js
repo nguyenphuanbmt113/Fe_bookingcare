@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createNewUser, handleGetAllUser } from "../../services/userService";
+import {
+  createNewUser,
+  deleteUser,
+  handleGetAllUser,
+} from "../../services/userService";
 import ModalUser from "./ModalUser";
 import "./usermanage.scss";
 
@@ -31,24 +35,36 @@ class UserManage extends Component {
       showmodalcreate: true,
     });
   };
+  //toggle modal
   toggleUserModal = () => {
     this.setState({
       showmodalcreate: !this.state.showmodalcreate,
     });
   };
-
+  //create user
   createnewUser = async (data) => {
     try {
       const res = await createNewUser(data);
       if (res.data.EC === 0) {
         await this.getAllUserApi();
         this.toggleUserModal();
+        this.setState({});
       } else {
         alert(res.data.EM);
       }
-      console.log(">create user res", res);
+    } catch (error) {}
+  };
+  //delete user by id fn
+  handleDelete = async (id) => {
+    console.log("id", id)
+    try {
+      const res = await deleteUser(id);
+      console.log("delete res", res);
+      if (res.data.EC === 0) {
+        await this.getAllUserApi();
+      }
     } catch (error) {
-      console.log(">...check error:", error);
+      console.log("error:", error);
     }
   };
   render() {
@@ -85,7 +101,9 @@ class UserManage extends Component {
                         <button className="bg-blue">
                           <i className="far fa-edit"></i>
                         </button>
-                        <button className="bg-red">
+                        <button
+                          className="bg-red"
+                          onClick={() => this.handleDelete(item.id)}>
                           <i className="far fa-trash-alt "></i>
                         </button>
                       </div>
