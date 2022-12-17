@@ -16,4 +16,7 @@ const createNewUser = (data) => {
 const deleteUser = (id) => {
   return axios.delete("api/v1/user/delete", { data: { id: id } });
 };
-export { handleLogin, handleGetAllUser, createNewUser, deleteUser };
+const updateUser = (data) => {
+  return axios.put("api/v1/user/update", { data });
+};
+export { handleLogin, handleGetAllUser, createNewUser, deleteUser, updateUser };

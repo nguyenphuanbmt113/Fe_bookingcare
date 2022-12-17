@@ -4,7 +4,9 @@ import {
   createNewUser,
   deleteUser,
   handleGetAllUser,
+  updateUser,
 } from "../../services/userService";
+import ModalUpdateUser from "./ModalUpdateUser";
 import ModalUser from "./ModalUser";
 import "./usermanage.scss";
 
@@ -13,13 +15,14 @@ class UserManage extends Component {
     super(props);
     this.state = {
       userData: [],
+      userDataUpdate: {},
       showmodalcreate: false,
+      showmodalupdate: false,
     };
   }
   //fn getall user
   getAllUserApi = async () => {
     let res = await handleGetAllUser();
-    console.log("res", res);
     if (res.data.EC === 0) {
       this.setState({
         userData: res.data.data,
@@ -35,10 +38,23 @@ class UserManage extends Component {
       showmodalcreate: true,
     });
   };
+  //btnshowupdateuser
+  btnshowupdateuser = (data) => {
+    this.setState({
+      showmodalupdate: true,
+      userDataUpdate: data,
+    });
+  };
   //toggle modal
   toggleUserModal = () => {
     this.setState({
       showmodalcreate: !this.state.showmodalcreate,
+    });
+  };
+  //toggle update modal
+  toggleUpdateUserModal = () => {
+    this.setState({
+      showmodalupdate: !this.state.showmodalupdate,
     });
   };
   //create user
@@ -54,12 +70,22 @@ class UserManage extends Component {
       }
     } catch (error) {}
   };
+  //update user
+  updatefnUser = async (data) => {
+    try {
+      const res = await updateUser(data);
+      if (res.data.EC === 0) {
+        await this.getAllUserApi();
+        this.toggleUpdateUserModal();
+      } else {
+        alert(res.data.EM);
+      }
+    } catch (error) {}
+  };
   //delete user by id fn
   handleDelete = async (id) => {
-    console.log("id", id)
     try {
       const res = await deleteUser(id);
-      console.log("delete res", res);
       if (res.data.EC === 0) {
         await this.getAllUserApi();
       }
@@ -98,7 +124,9 @@ class UserManage extends Component {
                     <td>{item.address}</td>
                     <td>
                       <div className="btn-container">
-                        <button className="bg-blue">
+                        <button
+                          className="bg-blue"
+                          onClick={() => this.btnshowupdateuser(item)}>
                           <i className="far fa-edit"></i>
                         </button>
                         <button
@@ -117,6 +145,13 @@ class UserManage extends Component {
           isOpen={this.state.showmodalcreate}
           toggle={this.toggleUserModal}
           createnewUser={this.createnewUser}></ModalUser>
+        {this.state.showmodalupdate === true && (
+          <ModalUpdateUser
+            isOpen={this.state.showmodalupdate}
+            userDataUpdate={this.state.userDataUpdate}
+            updatefnUser={this.updatefnUser}
+            toggle={this.toggleUpdateUserModal}></ModalUpdateUser>
+        )}
       </div>
     );
   }
