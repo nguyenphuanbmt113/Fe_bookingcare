@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { handleGetAllUser } from "../../services/userService";
+import { createNewUser, handleGetAllUser } from "../../services/userService";
 import ModalUser from "./ModalUser";
 import "./usermanage.scss";
 
@@ -12,7 +12,8 @@ class UserManage extends Component {
       showmodalcreate: false,
     };
   }
-  async componentDidMount() {
+  //fn getall user
+  getAllUserApi = async () => {
     let res = await handleGetAllUser();
     console.log("res", res);
     if (res.data.EC === 0) {
@@ -20,7 +21,9 @@ class UserManage extends Component {
         userData: res.data.data,
       });
     }
-    console.log("userData", this.state.userData);
+  };
+  async componentDidMount() {
+    await this.getAllUserApi();
   }
   //handle add new user
   handleAddNewUser = () => {
@@ -32,6 +35,21 @@ class UserManage extends Component {
     this.setState({
       showmodalcreate: !this.state.showmodalcreate,
     });
+  };
+
+  createnewUser = async (data) => {
+    try {
+      const res = await createNewUser(data);
+      if (res.data.EC === 0) {
+        await this.getAllUserApi();
+        this.toggleUserModal();
+      } else {
+        alert(res.data.EM);
+      }
+      console.log(">create user res", res);
+    } catch (error) {
+      console.log(">...check error:", error);
+    }
   };
   render() {
     let userData = this.state.userData;
@@ -79,7 +97,8 @@ class UserManage extends Component {
         </table>
         <ModalUser
           isOpen={this.state.showmodalcreate}
-          toggle={this.toggleUserModal}></ModalUser>
+          toggle={this.toggleUserModal}
+          createnewUser={this.createnewUser}></ModalUser>
       </div>
     );
   }
