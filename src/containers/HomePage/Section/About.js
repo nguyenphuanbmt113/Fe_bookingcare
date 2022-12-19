@@ -25,7 +25,7 @@ class AboutSection extends Component {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen></iframe>
               </div>
-              <div>
+              <div className="about-title">
                 Cho đến nay, khoảng 80% người dùng có phản hồi tích cực và 20%
                 khách hàng phản hồi chưa tốt khi sử dụng ứng dụng. để đạt được
                 những con số đó cũng là cả một chặng đường dài. Người sáng lập

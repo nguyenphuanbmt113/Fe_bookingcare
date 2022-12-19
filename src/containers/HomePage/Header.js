@@ -9,6 +9,19 @@ class Header extends Component {
     //fire redux action
     this.props.setChangeLanguage(language);
   };
+  componentDidMount() {
+    window.addEventListener("scroll", this.isSticky);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.isSticky);
+  }
+  isSticky = (e) => {
+    const header = document.querySelector(".home-header-container");
+    const scrollTop = window.scrollY;
+    scrollTop >= 150
+      ? header.classList.add("is-sticky")
+      : header.classList.remove("is-sticky");
+  };
   render() {
     const lang = this.props.lang;
     return (
