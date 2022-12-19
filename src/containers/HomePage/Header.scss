@@ -3,11 +3,7 @@
   padding: 10px;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  // position: fixed;
-  // right: 0;
-  // left: 0;
-  // top: 0;
-  // z-index: 1000;
+
   .home-header-content {
     padding: 0 20px;
     max-width: 1180px;
@@ -40,9 +36,14 @@
 
       .txt-bold {
         font-weight: bold;
+        cursor: pointer;
+        &:hover {
+          color: rgb(0, 102, 255);
+        }
       }
       .txt-thin {
         font-size: 10px;
+        cursor: pointer;
       }
       .child-content {
         display: flex;
@@ -61,6 +62,10 @@
       .txt-help {
         font-size: 16px;
         color: gray;
+        cursor: pointer;
+        &:hover {
+          color: rgb(0, 102, 255);
+        }
       }
     }
   }

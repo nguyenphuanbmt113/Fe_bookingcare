@@ -21,3 +21,23 @@
     }
   }
 }
+.language {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  & > span {
+    cursor: pointer;
+  }
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.text-black {
+  color: black;
+  font-weight: bold;
+}
+.welcome {
+}

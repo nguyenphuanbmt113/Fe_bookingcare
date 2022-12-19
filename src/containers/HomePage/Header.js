@@ -29,7 +29,7 @@ class Header extends Component {
         <div className="home-header-container">
           <div className="home-header-content">
             <div className="left-content">
-              <i class="fas fa-bars"></i>
+              <i className="fas fa-bars"></i>
               <div className="header-logo"></div>
             </div>
             <div className="mid-content">
@@ -142,14 +142,14 @@ class Header extends Component {
             </div>
             <div className="option">
               <div className="rounded-icons">
-                <i class="fas fa-user-shield"></i>
+                <i className="fas fa-user-shield"></i>
               </div>
               {this.props.lang === "en" ? "" : <div>Khám</div>}
               <FormattedMessage id="banner.children5"></FormattedMessage>
             </div>
             <div className="option">
               <div className="rounded-icons">
-                <i class="fas fa-venus-mars"></i>
+                <i className="fas fa-venus-mars"></i>
               </div>
               {this.props.lang === "en" ? "" : <div>Khám</div>}
               <FormattedMessage id="banner.children6"></FormattedMessage>
@@ -163,7 +163,7 @@ class Header extends Component {
             </div>
             <div className="option">
               <div className="rounded-icons">
-                <i class="fas fa-procedures"></i>
+                <i className="fas fa-procedures"></i>
               </div>
               {this.props.lang === "en" ? "" : <div>Khám</div>}
               <FormattedMessage id="banner.children8"></FormattedMessage>

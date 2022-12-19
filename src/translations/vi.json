@@ -31,7 +31,7 @@
       "system-administrator": {
         "header": "Quản trị hệ thống",
         "user-manage": "Quản lý người sử dụng",
-        "product-manage": "Quản lý gói",
+        "user-rd": "Quản lý User RD",
         "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
       },
       "system-parameter": {
@@ -127,7 +127,8 @@
     "Doctor": "Bác Sĩ",
     "Doctor-good": "Bác Sĩ Giỏi",
     "Fee": "Gói Khám",
-    "General-health-check": "Khám Sức Khỏe Tổng Quát"
+    "General-health-check": "Khám Sức Khỏe Tổng Quát",
+    "welcome": "Xin Chào, Admin!"
   },
   "banner": {
     "title1": "NỀN TẢNG Y TẾ",

@@ -30,7 +30,7 @@
       "header": "System",
       "system-administrator": {
         "header": "System Administrator",
-        "user-manage": "User manage",
+        "user-rd": "User RD Manage",
         "product-manage": "Package manage",
         "register-package-group-or-account": "Register service package for group/account"
       },
@@ -127,7 +127,8 @@
     "Choose-a-Clinic": "Choose a Clinic",
     "Doctor": "Doctor",
     "Fee": "Fee",
-    "General-health-check": "General Health Check"
+    "General-health-check": "General Health Check",
+    "welcome": "Welcome"
   },
   "banner": {
     "title1": "MEDICAL BACKGROUND",

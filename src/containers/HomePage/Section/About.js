@@ -21,9 +21,9 @@ class AboutSection extends Component {
                   height="280"
                   src="https://www.youtube.com/embed/7tiR7SI4CkI"
                   title="BookingCare trên VTV1 ngày 21/02/2018 - Chương trình Cà phê khởi nghiệp"
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen></iframe>
+                  allowFullScreen></iframe>
               </div>
               <div className="about-title">
                 Cho đến nay, khoảng 80% người dùng có phản hồi tích cực và 20%

@@ -35,18 +35,21 @@
       background: #ebebeb;
       text-transform: uppercase;
       display: inline-block;
-      padding: 10px 15px;
+      padding: 5px 10px;
+      font-weight: thin;
       color: #282e41;
+      font-size: 12px;
     }
     .doctor-container {
-      height: 245px;
+      cursor: pointer;
+      height: 240px;
       padding: 10px 5px;
       display: flex !important;
       flex-direction: column !important;
       align-items: center !important;
       gap: 3px;
       // justify-content: center !important;
-      border: 0.5px solid rgb(205, 205, 205);
+      border: 1px solid rgb(205, 205, 205);
       border-radius: 10px;
       width: 100%;
 
@@ -71,6 +74,7 @@
 
       &:hover {
         color: rgb(0, 119, 255);
+        cursor: pointer;
       }
     }
     .title-doctor2 {
@@ -83,6 +87,7 @@
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 10px !important;
+    cursor: pointer;
   }
   .handbook-image {
     height: 150px;
@@ -105,9 +110,13 @@
     display: grid;
     grid-template-columns: 3fr 2fr;
     grid-gap: 10px;
+    cursor: pointer;
   }
   .about-title {
     color: gray;
+    &:hover {
+      color: rgb(0, 119, 255);
+    }
   }
 }
 .img-container {
@@ -147,6 +156,20 @@
 .h {
   height: 300px;
 }
+
+.is-sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 2px 24px 0 rga(0 0 0);
+  background-color: #ffffff !important;
+  animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  transition: all 0.5s ease-in-out;
+}
 @media screen and (max-width: 1023.98px) {
   .section-container {
     .handbook-content {
@@ -160,17 +183,4 @@
       object-fit: cover;
     }
   }
-}
-.is-sticky {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999;
-  box-shadow: 0 2px 24px 0 rga(0 0 0);
-  background-color: #ffffff !important;
-  animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  transition: all 0.5s ease-in-out;
 }
