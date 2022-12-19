@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import Header from "./Header";
 import MedicalFacility from "./Section/MedicalFacility";
 import Specialization from "./Section/Specialization";
-import "./HomePage.scss"
+import "./HomePage.scss";
+import DoctorFacility from "./Section/DoctorFacility";
+import HandBook from "./Section/HandBook";
 class HomePage extends Component {
   render() {
     return (
@@ -11,6 +13,9 @@ class HomePage extends Component {
         <Header></Header>
         <Specialization></Specialization>
         <MedicalFacility></MedicalFacility>
+        <DoctorFacility></DoctorFacility>
+        <HandBook></HandBook>
+        {/* <div className="h"></div> */}
       </>
     );
   }
