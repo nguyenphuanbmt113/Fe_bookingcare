@@ -141,6 +141,8 @@
     "children7": "Surgery",
     "children8": "Medicine",
     "children9": "Enterprise",
-    "Popular-Specialization": "Popular Specialization"
+    "Popular-Specialization": "Popular Specialization",
+    "seemore": "See More",
+    "Medical-Facility": "Medical Facility"
   }
 }

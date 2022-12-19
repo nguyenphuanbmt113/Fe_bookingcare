@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./Specialization.scss";
+import "../HomePage.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { FormattedMessage } from "react-intl";
 let settings = {
-  dots: true,
+  // dots: true,
   infinite: true,
   speed: 500,
   slidesToShow: 4,
@@ -17,7 +18,7 @@ let settings = {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
-        dots: true,
+        // dots: true,
       },
     },
     {
@@ -43,8 +44,14 @@ class Specialization extends Component {
       <div className="section-container">
         <div className="section-content">
           <div className="section-top">
-            <span className="title1">Bác sĩ từ xa qua Video</span>
-            <span className="btn-section">Xem Thêm</span>
+            <span className="title1">
+              {" "}
+              <FormattedMessage id="banner.Popular-Specialization"></FormattedMessage>
+            </span>
+            <span className="btn-section">
+              {" "}
+              <FormattedMessage id="banner.seemore"></FormattedMessage>
+            </span>
           </div>
           <div className="slick-container">
             <Slider {...settings}>
