@@ -24,6 +24,7 @@
     "react-flatpickr": "^3.10.7",
     "react-icons": "^4.7.1",
     "react-intl": "^5.20.2",
+    "react-loader-spinner": "^5.3.4",
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",

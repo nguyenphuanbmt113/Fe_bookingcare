@@ -4,8 +4,22 @@
   padding: 10px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 .form-control:focus {
   border: 0 !important;
   box-shadow: inset 0.5px 0.5px 0.5px #ddd !important;
+}
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }

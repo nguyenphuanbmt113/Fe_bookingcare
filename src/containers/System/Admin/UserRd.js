@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-
+import { RotatingTriangles } from "react-loader-spinner";
 import { fetchGenderStart } from "../../../store/actions/adminActions";
 import "./UserRd.scss";
 class UserRd extends Component {
@@ -18,8 +18,26 @@ class UserRd extends Component {
 
   render() {
     let genderData = this.props.genderData;
+    let isLoadingGender = this.props.isLoadingGender;
+    console.log("isLoadingGender", isLoadingGender);
     return (
       <div className="userrd-container">
+        {isLoadingGender === true && (
+          <div>
+            <div className="loading">
+              <RotatingTriangles
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="rotating-triangels-loading"
+                wrapperStyle={{}}
+                wrapperClass="rotating-triangels-wrapper"
+                colors={["#fff", "#fff", "#fff"]}
+              />
+            </div>
+            <div className="overlay"></div>
+          </div>
+        )}
         <div className="title mb-3">
           {" "}
           <FormattedMessage id="menu.manage-user.manage-user"></FormattedMessage>
@@ -129,6 +147,7 @@ const mapStateToProps = (state) => {
   return {
     lang: state.app.language,
     genderData: state.admin.genderData,
+    isLoadingGender: state.admin.isLoadingGender,
   };
 };
 
