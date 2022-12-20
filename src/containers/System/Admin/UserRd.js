@@ -1,33 +1,23 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
 
+import { fetchGenderStart } from "../../../store/actions/adminActions";
 import "./UserRd.scss";
-import { getAllcodesBytype } from "../../../services/userService";
 class UserRd extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      genderData: [],
+      // genderData: [],
     };
   }
 
   async componentDidMount() {
-    try {
-      const res = await getAllcodesBytype("gender");
-      console.log("res", res);
-      if (res?.data?.EC === 0) {
-        this.setState({
-          genderData: res?.data?.DT,
-        });
-      }
-    } catch (error) {
-      console.log(">>>>>check error:", error);
-    }
+    this.props.getGenderStart();
   }
 
   render() {
-    let genderData = this.state.genderData;
+    let genderData = this.props.genderData;
     return (
       <div className="userrd-container">
         <div className="title mb-3">
@@ -88,10 +78,11 @@ class UserRd extends Component {
                     genderData.length > 0 &&
                     genderData.map((item) => {
                       return (
-                        <option
-                          key={
-                            item.id
-                          }>{this.props.lang === "vi" ? item.valueVi : item.valueEn}</option>
+                        <option key={item.id}>
+                          {this.props.lang === "vi"
+                            ? item.valueVi
+                            : item.valueEn}
+                        </option>
                       );
                     })}
                 </select>
@@ -137,11 +128,14 @@ class UserRd extends Component {
 const mapStateToProps = (state) => {
   return {
     lang: state.app.language,
+    genderData: state.admin.genderData,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getGenderStart: () => dispatch(fetchGenderStart()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRd);

@@ -11,6 +11,11 @@ const actionTypes = Object.freeze({
 
   //changelanguage
   CHANGE_LANGUAGE: "CHANGE_LANGUAGE",
+
+  //gender
+  FETCH_GENDER_START: "FETCH_GENDER_START",
+  FETCH_GENDER_SUCCESS: "FETCH_GENDER_SUCCESS",
+  FETCH_GENDER_FAIL: "FETCH_GENDER_FAIL",
 });
 
 export default actionTypes;
