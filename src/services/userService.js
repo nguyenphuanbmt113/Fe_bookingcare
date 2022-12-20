@@ -19,4 +19,14 @@ const deleteUser = (id) => {
 const updateUser = (data) => {
   return axios.put("api/v1/user/update", { data });
 };
-export { handleLogin, handleGetAllUser, createNewUser, deleteUser, updateUser };
+const getAllcodesBytype = (type) => {
+  return axios.get(`api/v1/allcodes?type=${type}`);
+};
+export {
+  handleLogin,
+  handleGetAllUser,
+  createNewUser,
+  deleteUser,
+  updateUser,
+  getAllcodesBytype,
+};

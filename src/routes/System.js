@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "../containers/Header/Header";
-import UserRd from "../containers/System/UserRd";
+import UserRd from "../containers/System/Admin/UserRd";
 import UserManage from "../containers/System/UserManage";
 
 class System extends Component {
@@ -16,10 +16,6 @@ class System extends Component {
             <Switch>
               <Route path="/system/user-manage" component={UserManage} />
               <Route path="/system/user-rd" component={UserRd} />
-              {/* <Route
-                path="/system/register-package-group-or-account"
-                component={RegisterPackageGroupOrAcc}
-              /> */}
               <Route
                 component={() => {
                   return <Redirect to={systemMenuPath} />;

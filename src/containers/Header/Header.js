@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as actions from "../../store/actions";
 import Navigator from "../../components/Navigator";
-import { adminMenu } from "./menuApp";
-import "./Header.scss";
-import { LANGUAGES } from "../../utils/constant";
+import * as actions from "../../store/actions";
 import { changeLanguage } from "../../store/actions";
-import { FormattedMessage } from "react-intl";
+import { LANGUAGES } from "../../utils/constant";
+import "./Header.scss";
+import { adminMenu } from "./menuApp";
 
 class Header extends Component {
   handleChangeLanguage = (language) => {

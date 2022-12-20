@@ -1,0 +1,11 @@
+.container-add {
+  max-width: 1000px;
+  width: 100%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form-control:focus {
+  border: 0 !important;
+  box-shadow: inset 0.5px 0.5px 0.5px #ddd !important;
+}
