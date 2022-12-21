@@ -1,4 +1,4 @@
-import { getAllcodesBytype } from "../../services/userService";
+import { getAllcodesBytype, createNewUser } from "../../services/userService";
 import actionTypes from "./actionTypes";
 //getAllcodesBytype
 //start //doing //end
@@ -26,21 +26,25 @@ export const fetchPositionSuceess = (genderData) => ({
 export const fetchPositionFail = () => ({
   type: actionTypes.FETCH_POSITION_FAIL,
 });
+//user
+export const fetchUserSuceess = () => ({
+  type: actionTypes.FETCH_USER_SUCCESS,
+});
+export const fetchUserFail = () => ({
+  type: actionTypes.FETCH_USER_FAIL,
+});
 
 //actions gender
 export const fetchGenderStart = () => {
   return async (dispatch, getState) => {
     dispatch(fetchGenderBegin());
     try {
-      setTimeout(async () => {
-        let res = await getAllcodesBytype("gender");
-        console.log("res", res);
-        if (res?.data.EC === 0) {
-          dispatch(fetchGenderSuceess(res?.data?.DT));
-        } else {
-          dispatch(fetchGenderFail());
-        }
-      }, 2000);
+      let res = await getAllcodesBytype("gender");
+      if (res?.data.EC === 0) {
+        dispatch(fetchGenderSuceess(res?.data?.DT));
+      } else {
+        dispatch(fetchGenderFail());
+      }
     } catch (error) {
       dispatch(fetchGenderFail());
       console.log(">>checek err:", error);
@@ -51,15 +55,13 @@ export const fetchGenderStart = () => {
 export const fetchRoleStart = () => {
   return async (dispatch, getState) => {
     try {
-      setTimeout(async () => {
-        let res = await getAllcodesBytype("role");
-        console.log("res", res);
-        if (res?.data.EC === 0) {
-          dispatch(fetchRoleSuceess(res?.data?.DT));
-        } else {
-          fetchGenderFail();
-        }
-      }, 1000);
+      let res = await getAllcodesBytype("role");
+      console.log("res", res);
+      if (res?.data.EC === 0) {
+        dispatch(fetchRoleSuceess(res?.data?.DT));
+      } else {
+        fetchGenderFail();
+      }
     } catch (error) {
       dispatch(fetchRoleFail());
       console.log(">>checek err:", error);
@@ -70,18 +72,32 @@ export const fetchRoleStart = () => {
 export const fetchPositionStart = () => {
   return async (dispatch, getState) => {
     try {
-      setTimeout(async () => {
-        let res = await getAllcodesBytype("position");
-        console.log("res", res);
-        if (res?.data.EC === 0) {
-          dispatch(fetchPositionSuceess(res?.data?.DT));
-        } else {
-          dispatch(fetchPositionFail());
-        }
-      }, 2000);
+      let res = await getAllcodesBytype("position");
+
+      if (res?.data.EC === 0) {
+        dispatch(fetchPositionSuceess(res?.data?.DT));
+      } else {
+        dispatch(fetchPositionFail());
+      }
     } catch (error) {
       dispatch(fetchPositionFail());
       console.log(">>checek err:", error);
+    }
+  };
+};
+//user action
+export const fetchUser = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await createNewUser(data);
+      console.log("check user hahahhahahahres", res)
+      if (res?.data?.EC === 0) {
+        dispatch(fetchUserSuceess());
+      } else {
+        dispatch(fetchUserFail());
+      }
+    } catch (error) {
+      console.log(">>check erroe:", error);
     }
   };
 };

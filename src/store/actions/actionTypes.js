@@ -23,6 +23,11 @@ const actionTypes = Object.freeze({
   //role
   FETCH_ROLE_SUCCESS: "FETCH_ROLE_SUCCESS",
   FETCH_ROLE_FAIL: "FETCH_ROLE_FAIL",
+
+  //user
+  // FETCH_USER_START: "FETCH_USER_START",
+  FETCH_USER_SUCCESS: "FETCH_USER_SUCCESS",
+  FETCH_USER_FAIL: "FETCH_USER_FAIL",
 });
 
 export default actionTypes;
