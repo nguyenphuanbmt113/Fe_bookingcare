@@ -30,7 +30,6 @@ class Login extends Component {
     });
     try {
       const res = await handleLogin(this.state.email, this.state.password);
-      console.log("res", res);
       if (res.data.EC !== 0) {
         this.setState({
           errorMess: res.data.EM,

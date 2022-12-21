@@ -23,6 +23,7 @@
       "phone": "Phone Number",
       "address": "Address",
       "role": "Role",
+      "position": "Position",
       "gender": "Gender",
       "image": "Image",
       "Male": "Male",

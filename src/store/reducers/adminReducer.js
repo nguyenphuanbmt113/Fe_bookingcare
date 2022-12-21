@@ -16,7 +16,6 @@ const adminReducer = (state = initialState, action) => {
         ...copyState,
       };
     case actionTypes.FETCH_GENDER_SUCCESS:
-      console.log(">>>>Action", action);
       return {
         ...state,
         genderData: action.data,
@@ -26,6 +25,24 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoadingGender: true,
+      };
+    case actionTypes.FETCH_ROLE_SUCCESS:
+      return {
+        ...state,
+        roleData: action.data,
+      };
+    case actionTypes.FETCH_ROLE_FAIL:
+      return {
+        ...state,
+      };
+    case actionTypes.FETCH_POSITION_SUCCESS:
+      return {
+        ...state,
+        positionData: action.data,
+      };
+    case actionTypes.FETCH_POSITION_FAIL:
+      return {
+        ...state,
       };
     default:
       return state;
