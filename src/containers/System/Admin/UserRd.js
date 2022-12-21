@@ -1,186 +1,191 @@
 import React, { Component } from "react";
+import "react-image-lightbox/style.css";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import { RotatingTriangles } from "react-loader-spinner";
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
 import {
+  fetchCreateUser,
   fetchGenderStart,
   fetchPositionStart,
-  fetchRoleStart,
-  fetchUser,
+  fetchRoleStart
 } from "../../../store/actions/adminActions";
-import "./UserRd.scss";
+import ModalUserV2 from "../ModalUserV2";
+// import ModalUserV2 from "../ModalUserV2";
 import TableUser from "./TableUser";
-// import TablemanageUser from "./TableUser";
+import "./UserRd.scss";
 class UserRd extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgName: "",
-      previewImg: "",
-      isOpen: false,
-      email: "",
-      password: "",
-      address: "",
-      gender: "",
-      role: "",
-      position: "",
-      phonenumber: "",
-      firstName: "",
-      lastName: "",
-      image: "",
+      isShow: false,
+      // arrGenders: [],
+      // arrRoles: [],
+      // arrPositions: [],
+      // imgName: "",
+      // previewImg: "",
+      // isOpen: false,
+      // email: "",
+      // password: "",
+      // address: "",
+      // gender: "",
+      // role: "",
+      // position: "",
+      // phonenumber: "",
+      // firstName: "",
+      // lastName: "",
+      // image: "",
     };
   }
-
-  async componentDidMount() {
-    this.props.getGenderStart();
-    this.props.getRoleStart();
-    this.props.getPositionStart();
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.genderData !== this.props.genderData) {
-      const arrGender = this.props.genderData;
-      console.log("absf");
-      this.setState({
-        genderData: arrGender,
-        gender: arrGender && arrGender.length > 0 ? arrGender[0].key : "",
-      });
-    }
-    if (prevProps.roleData !== this.props.roleData) {
-      const arrRole = this.props.roleData;
-      this.setState({
-        roleData: arrRole,
-        role: arrRole && arrRole.length > 0 ? arrRole[0].key : "",
-      });
-    }
-    if (prevProps.positionData !== this.props.positionData) {
-      const arrPosition = this.props.positionData;
-      this.setState({
-        positionData: this.props.positionData,
-        position:
-          arrPosition && arrPosition.length > 0 ? arrPosition[0].key : "",
-      });
-    }
-  }
-  handleChangeImg = (e) => {
-    let file = e.target.files[0];
-    console.log("file", file);
+  toggle = () => {
     this.setState({
-      imgName: file.name,
-      image: file,
+      isShow: !this.state.isShow,
     });
-    if (file) {
-      const imgPrev = URL.createObjectURL(file);
-      console.log("imgPrev", imgPrev);
-      this.setState({
-        previewImg: imgPrev,
-      });
-    }
   };
-  showImgPreview = () => {
-    this.setState({ isOpen: true });
-  };
+
+  // async componentDidMount() {
+  //   this.props.getGenderStart();
+  //   this.props.getRoleStart();
+  //   this.props.getPositionStart();
+  // }
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   if (prevProps.genderData !== this.props.genderData) {
+  //     const arrGender = this.props.genderData;
+  //     this.setState({
+  //       arrGenders: arrGender,
+  //       gender: arrGender && arrGender.length > 0 ? arrGender[0].key : "",
+  //     });
+  //   }
+  //   if (prevProps.roleData !== this.props.roleData) {
+  //     const arrRole = this.props.roleData;
+  //     this.setState({
+  //       arrRoles: arrRole,
+  //       role: arrRole && arrRole.length > 0 ? arrRole[0].key : "",
+  //     });
+  //   }
+  //   if (prevProps.positionData !== this.props.positionData) {
+  //     const arrPosition = this.props.positionData;
+  //     this.setState({
+  //       arrPositions: arrPosition,
+  //       position:
+  //         arrPosition && arrPosition.length > 0 ? arrPosition[0].key : "",
+  //     });
+  //   }
+  // }
+  // handleChangeImg = (e) => {
+  //   let file = e.target.files[0];
+  //   this.setState({
+  //     imgName: file.name,
+  //     image: file,
+  //   });
+  //   if (file) {
+  //     const imgPrev = URL.createObjectURL(file);
+  //     this.setState({
+  //       previewImg: imgPrev,
+  //     });
+  //   }
+  // };
+  // showImgPreview = () => {
+  //   this.setState({ isOpen: true });
+  // };
   //check validation
-  checkValidation = () => {
-    let arrInput = [
-      "email",
-      "password",
-      "firstName",
-      "lastName",
-      "address",
-      "phonenumber",
-      "role",
-      "position",
-      "gender",
-    ];
-    let isValid = true;
-    for (let i = 0; i < arrInput.length; i++) {
-      if (!this.state[arrInput[i]]) {
-        isValid = false;
-        alert("Missing parameter", +arrInput[i]);
-        break;
-      }
-    }
-    return isValid;
-  };
+  // checkValidation = () => {
+  //   let arrInput = [
+  //     "email",
+  //     "password",
+  //     "firstName",
+  //     "lastName",
+  //     "address",
+  //     "phonenumber",
+  //     "role",
+  //     "position",
+  //     "gender",
+  //   ];
+  //   let isValid = true;
+  //   for (let i = 0; i < arrInput.length; i++) {
+  //     if (!this.state[arrInput[i]]) {
+  //       isValid = false;
+  //       alert("Missing parameter", +arrInput[i]);
+  //       break;
+  //     }
+  //   }
+  //   return isValid;
+  // };
   //input chnage
-  handleOnchnageInput = (e, type) => {
-    if (type === "EMAIL") {
-      this.setState({
-        email: e.target.value,
-      });
-    }
-    if (type === "PASSWORD") {
-      this.setState({
-        password: e.target.value,
-      });
-    }
-    if (type === "FIRSTNAME") {
-      this.setState({
-        firstName: e.target.value,
-      });
-    }
-    if (type === "LASTNAME") {
-      this.setState({
-        lastName: e.target.value,
-      });
-    }
-    if (type === "PHONENUMBER") {
-      this.setState({
-        phonenumber: e.target.value,
-      });
-    }
-    if (type === "ADDRESS") {
-      this.setState({
-        address: e.target.value,
-      });
-    }
-    if (type === "ROLE") {
-      this.setState({
-        role: e.target.value,
-      });
-    }
-    if (type === "POSITION") {
-      this.setState({
-        position: e.target.value,
-      });
-    }
-    if (type === "GENDER") {
-      this.setState({
-        gender: e.target.value,
-      });
-    }
-    if (type === "IMAGE") {
-      this.setState({
-        image: e.target.files,
-      });
-    }
-  };
+  // handleOnchnageInput = (e, type) => {
+  //   if (type === "EMAIL") {
+  //     this.setState({
+  //       email: e.target.value,
+  //     });
+  //   }
+  //   if (type === "PASSWORD") {
+  //     this.setState({
+  //       password: e.target.value,
+  //     });
+  //   }
+  //   if (type === "FIRSTNAME") {
+  //     this.setState({
+  //       firstName: e.target.value,
+  //     });
+  //   }
+  //   if (type === "LASTNAME") {
+  //     this.setState({
+  //       lastName: e.target.value,
+  //     });
+  //   }
+  //   if (type === "PHONENUMBER") {
+  //     this.setState({
+  //       phonenumber: e.target.value,
+  //     });
+  //   }
+  //   if (type === "ADDRESS") {
+  //     this.setState({
+  //       address: e.target.value,
+  //     });
+  //   }
+  //   if (type === "ROLE") {
+  //     this.setState({
+  //       role: e.target.value,
+  //     });
+  //   }
+  //   if (type === "POSITION") {
+  //     this.setState({
+  //       position: e.target.value,
+  //     });
+  //   }
+  //   if (type === "GENDER") {
+  //     this.setState({
+  //       gender: e.target.value,
+  //     });
+  //   }
+  //   if (type === "IMAGE") {
+  //     this.setState({
+  //       image: e.target.files,
+  //     });
+  //   }
+  // };
   //submit BTN
-  handleSaveUser = () => {
-    this.props.getUser({
-      email: this.state.email,
-      password: this.state.password,
-      address: this.state.address,
-      gender: this.state.gender,
-      roleId: this.state.role,
-      positionId: this.state.position,
-      phonenumber: this.state.phonenumber,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      image: this.state.image,
-    });
-  };
+  // handleSaveUser = () => {
+  //   this.props.createUser({
+  //     email: this.state.email,
+  //     password: this.state.password,
+  //     address: this.state.address,
+  //     gender: this.state.gender,
+  //     roleId: this.state.role,
+  //     positionId: this.state.position,
+  //     phonenumber: this.state.phonenumber,
+  //     firstName: this.state.firstName,
+  //     lastName: this.state.lastName,
+  //     image: this.state.image,
+  //   });
+  // };
   render() {
-    let genderData = this.props.genderData;
-    let roleData = this.props.roleData;
-    let positionData = this.props.positionData;
-    let isLoadingGender = this.props.isLoadingGender;
-    // console.log(">check: ", this.state.previewImg);
+    // let isLoadingGender = this.props.isLoadingGender;
+    // const { arrPositions, arrRoles, arrGenders } = this.state;
     return (
       <>
-        <div className="userrd-container">
+        <button onClick={() => this.toggle()} className="btn-add">
+          <FormattedMessage id="menu.manage-user.Create-User"></FormattedMessage>
+        </button>
+        {/* <div className="userrd-container">
           {isLoadingGender === true && (
             <div>
               <div className="loading">
@@ -284,9 +289,9 @@ class UserRd extends Component {
                     className="form-select"
                     value={this.state.gender}
                     onChange={(e) => this.handleOnchnageInput(e, "GENDER")}>
-                    {genderData &&
-                      genderData.length > 0 &&
-                      genderData.map((item) => {
+                    {arrGenders &&
+                      arrGenders.length > 0 &&
+                      arrGenders.map((item) => {
                         return (
                           <option key={item.id} value={item.key}>
                             {this.props.lang === "vi"
@@ -306,9 +311,9 @@ class UserRd extends Component {
                     className="form-select"
                     value={this.state.position}
                     onChange={(e) => this.handleOnchnageInput(e, "POSITION")}>
-                    {positionData &&
-                      positionData.length > 0 &&
-                      positionData.map((item) => {
+                    {arrPositions &&
+                      arrPositions.length > 0 &&
+                      arrPositions.map((item) => {
                         return (
                           <option key={item.id} value={item.key}>
                             {this.props.lang === "vi"
@@ -328,9 +333,9 @@ class UserRd extends Component {
                     className="form-select"
                     value={this.state.role}
                     onChange={(e) => this.handleOnchnageInput(e, "ROLE")}>
-                    {roleData &&
-                      roleData.length > 0 &&
-                      roleData.map((item) => {
+                    {arrRoles &&
+                      arrRoles.length > 0 &&
+                      arrRoles.map((item) => {
                         return (
                           <option key={item.id} value={item.key}>
                             {this.props.lang === "vi"
@@ -377,14 +382,21 @@ class UserRd extends Component {
               </div>
             </div>
           </div>
-        </div>
-        {this.state.previewImg && this.state.isOpen === true && (
+        </div> */}
+        {/* {this.state.previewImg && this.state.isOpen === true && (
           <Lightbox
             mainSrc={this.state.previewImg}
             onCloseRequest={() => this.setState({ isOpen: false })}
           />
-        )}
+        )} */}
+        <div className="title mb-3">
+          {" "}
+          <FormattedMessage id="menu.manage-user.manage-user"></FormattedMessage>
+        </div>
         <TableUser></TableUser>
+        <ModalUserV2
+          isShow={this.state.isShow}
+          toggle={this.toggle}></ModalUserV2>
       </>
     );
   }
@@ -405,7 +417,7 @@ const mapDispatchToProps = (dispatch) => {
     getGenderStart: () => dispatch(fetchGenderStart()),
     getRoleStart: () => dispatch(fetchRoleStart()),
     getPositionStart: () => dispatch(fetchPositionStart()),
-    getUser: (data) => dispatch(fetchUser(data)),
+    createUser: (data) => dispatch(fetchCreateUser(data)),
   };
 };
 

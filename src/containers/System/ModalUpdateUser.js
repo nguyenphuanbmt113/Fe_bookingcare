@@ -16,7 +16,6 @@ class ModalUpdateUser extends Component {
     };
   }
   componentDidMount() {
-    console.log(">props", this.props.userDataUpdate);
     this.setState({
       id: this.props.userDataUpdate?.id,
       email: this.props.userDataUpdate?.email,
@@ -68,7 +67,6 @@ class ModalUpdateUser extends Component {
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         isValid = false;
-        console.log(arrInput[i]);
         break;
       }
     }
@@ -82,7 +80,6 @@ class ModalUpdateUser extends Component {
     }
   };
   render() {
-    console.log("dataupdate:", this.props.userDataUpdate);
     return (
       <Modal
         isOpen={this.props.isOpen}

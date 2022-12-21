@@ -1,4 +1,8 @@
-import { getAllcodesBytype, createNewUser } from "../../services/userService";
+import {
+  getAllcodesBytype,
+  createNewUser,
+  handleGetAllUser,
+} from "../../services/userService";
 import actionTypes from "./actionTypes";
 //getAllcodesBytype
 //start //doing //end
@@ -27,11 +31,11 @@ export const fetchPositionFail = () => ({
   type: actionTypes.FETCH_POSITION_FAIL,
 });
 //user
-export const fetchUserSuceess = () => ({
-  type: actionTypes.FETCH_USER_SUCCESS,
+export const fetchCreateUserSuceess = () => ({
+  type: actionTypes.FETCH_CREATE_USER_SUCCESS,
 });
-export const fetchUserFail = () => ({
-  type: actionTypes.FETCH_USER_FAIL,
+export const fetchCreateUserFail = () => ({
+  type: actionTypes.FETCH_CREATE_USER_FAIL,
 });
 
 //actions gender
@@ -56,7 +60,6 @@ export const fetchRoleStart = () => {
   return async (dispatch, getState) => {
     try {
       let res = await getAllcodesBytype("role");
-      console.log("res", res);
       if (res?.data.EC === 0) {
         dispatch(fetchRoleSuceess(res?.data?.DT));
       } else {
@@ -85,16 +88,39 @@ export const fetchPositionStart = () => {
     }
   };
 };
-//user action
-export const fetchUser = (data) => {
+//user create action
+export const fetchCreateUser = (data) => {
   return async (dispatch, getState) => {
     try {
       const res = await createNewUser(data);
-      console.log("check user hahahhahahahres", res)
       if (res?.data?.EC === 0) {
-        dispatch(fetchUserSuceess());
+        dispatch(fetchCreateUserSuceess());
+        dispatch(fetchAllUser());
       } else {
-        dispatch(fetchUserFail());
+        dispatch(fetchCreateUserFail());
+      }
+    } catch (error) {
+      console.log(">>check erroe:", error);
+    }
+  };
+};
+
+//getAlluser
+export const fetchAllUserSuceess = (data) => ({
+  type: actionTypes.FETCH_ALLUSER_SUCCESS,
+  data: data,
+});
+export const fetchAllUserFail = () => ({
+  type: actionTypes.FETCH_ALLUSER_FAIL,
+});
+export const fetchAllUser = () => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await handleGetAllUser();
+      if (res?.data?.EC === 0) {
+        dispatch(fetchAllUserSuceess(res?.data?.data));
+      } else {
+        dispatch(fetchAllUserFail());
       }
     } catch (error) {
       console.log(">>check erroe:", error);

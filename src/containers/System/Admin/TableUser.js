@@ -1,14 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { fetchAllUser } from "../../../store/actions/adminActions";
 
 class TableUser extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      users: [],
+    };
+  }
+  async componentDidMount() {
+    this.props.getAllUser();
+  }
+  componentDidUpdate(prevProps) {
+    console.log("prevProps", prevProps);
+    if (prevProps.usersData !== this.props.usersData) {
+      this.setState({
+        users: this.props.usersData,
+      });
+    }
   }
 
   render() {
-    let userData = this.state.userData;
+    let users = this.state.users;
     return (
       <div className="user-container ">
         <table className="table table-bordered table-hover">
@@ -23,8 +37,8 @@ class TableUser extends Component {
             </tr>
           </thead>
           <tbody>
-            {userData &&
-              userData.map((item, index) => {
+            {users &&
+              users.map((item, index) => {
                 return (
                   <tr>
                     <th scope="row">{item.id}</th>
@@ -56,11 +70,15 @@ class TableUser extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    usersData: state.admin.usersData,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getAllUser: () => dispatch(fetchAllUser()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableUser);

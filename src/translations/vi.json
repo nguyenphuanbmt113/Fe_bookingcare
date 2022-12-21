@@ -40,7 +40,8 @@
       "image": "Hình Ảnh",
       "Male": "Nam",
       "Female": "Nữ",
-      "other": "Khác"
+      "other": "Khác",
+      "Create-User":"Thêm Người Dùng"
     }
   },
   "header": {
