@@ -2,8 +2,10 @@ import {
   getAllcodesBytype,
   createNewUser,
   handleGetAllUser,
+  updateUser,
 } from "../../services/userService";
 import actionTypes from "./actionTypes";
+import { toast } from "react-toastify";
 //getAllcodesBytype
 //start //doing //end
 export const fetchGenderBegin = () => ({
@@ -94,6 +96,7 @@ export const fetchCreateUser = (data) => {
     try {
       const res = await createNewUser(data);
       if (res?.data?.EC === 0) {
+        toast.success(res?.data?.EM);
         dispatch(fetchCreateUserSuceess());
         dispatch(fetchAllUser());
       } else {
@@ -118,9 +121,34 @@ export const fetchAllUser = () => {
     try {
       const res = await handleGetAllUser();
       if (res?.data?.EC === 0) {
-        dispatch(fetchAllUserSuceess(res?.data?.data));
+        let users = res.data?.data.reverse();
+        dispatch(fetchAllUserSuceess(users));
       } else {
         dispatch(fetchAllUserFail());
+      }
+    } catch (error) {
+      console.log(">>check erroe:", error);
+    }
+  };
+};
+
+//update action
+export const fetchUpdateUserSuceess = () => ({
+  type: actionTypes.FETCH_UPDATEUSER_SUCCESS,
+});
+export const fetchUpdateUserFail = () => ({
+  type: actionTypes.FETCH_UPDATEUSER_FAIL,
+});
+export const fetchUpdateUser = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await updateUser(data);
+      if (res?.data?.EC === 0) {
+        toast.success(res?.data?.EM);
+        dispatch(fetchUpdateUserSuceess());
+        dispatch(fetchAllUser());
+      } else {
+        dispatch(fetchUpdateUserFail());
       }
     } catch (error) {
       console.log(">>check erroe:", error);

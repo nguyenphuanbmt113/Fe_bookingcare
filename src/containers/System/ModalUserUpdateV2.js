@@ -6,18 +6,18 @@ import { RotatingTriangles } from "react-loader-spinner";
 import { connect } from "react-redux";
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 import "./ModalUser.scss";
-// import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 import {
-  fetchAllUser,
   fetchCreateUser,
   fetchGenderStart,
   fetchPositionStart,
   fetchRoleStart,
+  fetchUpdateUser,
 } from "../../store/actions/adminActions";
-class ModalUserV2 extends Component {
+class ModalUserUpdateV2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       arrGenders: [],
       arrRoles: [],
       arrPositions: [],
@@ -41,45 +41,42 @@ class ModalUserV2 extends Component {
     this.props.getGenderStart();
     this.props.getRoleStart();
     this.props.getPositionStart();
+
+    this.setState({
+      id: this.props.userUpdate?.id,
+      email: this.props.userUpdate?.email,
+      password: this.props.userUpdate?.password,
+      phonenumber: this.props.userUpdate?.phonenumber,
+      address: this.props.userUpdate?.address,
+      firstName: this.props.userUpdate?.firstName,
+      lastName: this.props.userUpdate?.lastName,
+      role: this.props.userUpdate?.roleId,
+      position: this.props.userUpdate?.positionId,
+      gender: this.props.userUpdate?.gender,
+    });
   }
   //componen update
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.genderData !== this.props.genderData) {
-      const arrGender = this.props.genderData;
+      // let arrGender = this.props.genderData;
       this.setState({
-        arrGenders: arrGender,
-        gender: arrGender && arrGender.length > 0 ? arrGender[0].key : "",
+        arrGenders: this.props.genderData,
+        // gender: arrGender && arrGender.length > 0 ? arrGender[0].key : "",
       });
     }
     if (prevProps.roleData !== this.props.roleData) {
-      const arrRole = this.props.roleData;
+      let arrRole = this.props.roleData;
       this.setState({
         arrRoles: arrRole,
-        role: arrRole && arrRole.length > 0 ? arrRole[0].key : "",
+        // role: arrRole && arrRole.length > 0 ? arrRole[0].key : "",
       });
     }
     if (prevProps.positionData !== this.props.positionData) {
-      const arrPosition = this.props.positionData;
+      let arrPosition = this.props.positionData;
       this.setState({
         arrPositions: arrPosition,
-        position:
-          arrPosition && arrPosition.length > 0 ? arrPosition[0].key : "",
-      });
-    }
-    if (prevProps.usersData !== this.props.usersData) {
-      this.setState({
-        email: "",
-        password: "",
-        address: "",
-        gender: "",
-        role: "",
-        position: "",
-        phonenumber: "",
-        firstName: "",
-        lastName: "",
-        image: "",
-        imgName: "",
-        previewImg: "",
+        // position:
+        //   arrPosition && arrPosition.length > 0 ? arrPosition[0].key : "",
       });
     }
   }
@@ -105,7 +102,6 @@ class ModalUserV2 extends Component {
   checkValidation = () => {
     let arrInput = [
       "email",
-      "password",
       "firstName",
       "lastName",
       "address",
@@ -118,7 +114,7 @@ class ModalUserV2 extends Component {
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         isValid = false;
-        alert("Missing parameter", +arrInput[i]);
+        alert("Missing parameter: ", arrInput[i]);
         break;
       }
     }
@@ -178,26 +174,27 @@ class ModalUserV2 extends Component {
     }
   };
   //submit BTN
-  handleSaveUser = () => {
-    this.props.createUser({
-      email: this.state.email,
-      password: this.state.password,
-      address: this.state.address,
-      gender: this.state.gender,
-      roleId: this.state.role,
-      positionId: this.state.position,
-      phonenumber: this.state.phonenumber,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      image: this.state.image,
-    });
-    this.props.toggle();
+  handleUpdate = async () => {
+    let isValid = this.checkValidation();
+    if (isValid) {
+      this.props.updateUser({
+        id: this.state.id,
+        email: this.state.email,
+        address: this.state.address,
+        gender: this.state.gender,
+        roleId: this.state.role,
+        positionId: this.state.position,
+        phonenumber: this.state.phonenumber,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+      });
+      this.props.toggle();
+    }
   };
   //toggle
   toggle = () => {
     this.props.toggle();
   };
-  closeBtn = () => {};
   render() {
     let isLoadingGender = this.props.isLoadingGender;
     const { arrPositions, arrRoles, arrGenders } = this.state;
@@ -208,7 +205,7 @@ class ModalUserV2 extends Component {
           toggle={() => this.toggle()}
           size={"lg"}
           centered>
-          <ModalHeader toggle={() => this.toggle()}>Create User</ModalHeader>
+          <ModalHeader toggle={() => this.toggle()}>Update User</ModalHeader>
           <ModalBody>
             <div className="userrd-container">
               {isLoadingGender === true && (
@@ -246,7 +243,7 @@ class ModalUserV2 extends Component {
                         onChange={(e) => this.handleOnchnageInput(e, "EMAIL")}
                       />
                     </div>
-                    <div className="col-3">
+                    {/* <div className="col-3">
                       <label className="form-label">
                         {" "}
                         <FormattedMessage id="menu.manage-user.password"></FormattedMessage>
@@ -259,7 +256,7 @@ class ModalUserV2 extends Component {
                           this.handleOnchnageInput(e, "PASSWORD")
                         }
                       />
-                    </div>
+                    </div> */}
                     <div className="col-3">
                       <label className="form-label">
                         {" "}
@@ -411,22 +408,15 @@ class ModalUserV2 extends Component {
                         )}
                       </div>
                     </div>
-                    {/* <div
-                      className="col-12"
-                      onClick={() => this.handleSaveUser()}>
-                      <div className="btn btn-primary mt-2">
-                        <FormattedMessage id="menu.manage-user.createUser"></FormattedMessage>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
               </div>
               <div className="mt-4 p-3 border-t">
                 <Button
                   color="primary"
-                  onClick={() => this.handleSaveUser()}
+                  onClick={() => this.handleUpdate()}
                   className="px-3">
-                  <FormattedMessage id="menu.manage-user.createUser"></FormattedMessage>
+                  <FormattedMessage id="menu.manage-user.Update-User"></FormattedMessage>
                 </Button>
                 <Button
                   color="secondary"
@@ -455,7 +445,6 @@ const mapStateToProps = (state) => {
     roleData: state.admin.roleData,
     positionData: state.admin.positionData,
     isLoadingGender: state.admin.isLoadingGender,
-    usersData: state.admin.usersData,
   };
 };
 
@@ -465,8 +454,8 @@ const mapDispatchToProps = (dispatch) => {
     getRoleStart: () => dispatch(fetchRoleStart()),
     getPositionStart: () => dispatch(fetchPositionStart()),
     createUser: (data) => dispatch(fetchCreateUser(data)),
-    getAllUser: () => dispatch(fetchAllUser()),
+    updateUser: (data) => dispatch(fetchUpdateUser(data)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalUserV2);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalUserUpdateV2);

@@ -5,7 +5,7 @@
       "manage-doctor": "Manage Doctor",
       "manage-admin": "Manage Admin",
       "crud": "CRUD User",
-      "crud-redux": "CRUD User Redux",
+      "crud-redux": "Manage User",
       "manage-clinic": "Manage Clinic",
       "clinic": "Clinic",
       "speciality": "Speciality",
@@ -29,7 +29,8 @@
       "Male": "Male",
       "Female": "Female",
       "other": "Other",
-      "Create-User": "Create User"
+      "Create-User": "Create User",
+      "Update-User": "Update User"
     }
   },
   "header": {

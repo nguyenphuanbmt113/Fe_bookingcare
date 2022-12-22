@@ -16,6 +16,9 @@
     .menu-group-name {
       line-height: 40px;
       padding: 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       // background: white;
       // color: rgb(16, 124, 255);
       // border-right: 1px solid $border;

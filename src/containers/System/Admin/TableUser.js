@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
+import { deleteUser } from "../../../services/userService";
 import { fetchAllUser } from "../../../store/actions/adminActions";
 
 class TableUser extends Component {
@@ -13,14 +15,28 @@ class TableUser extends Component {
     this.props.getAllUser();
   }
   componentDidUpdate(prevProps) {
-    console.log("prevProps", prevProps);
     if (prevProps.usersData !== this.props.usersData) {
       this.setState({
         users: this.props.usersData,
       });
     }
   }
-
+  //delete user by id fn
+  handleDelete = async (id) => {
+    try {
+      const res = await deleteUser(id);
+      if (res.data.EC === 0) {
+        toast.success(res?.data?.EM);
+        await this.props.getAllUser();
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+  //update
+  btnshowupdateuser = (item) => {
+    this.props.getUpdateModal(item);
+  };
   render() {
     let users = this.state.users;
     return (
@@ -40,7 +56,7 @@ class TableUser extends Component {
             {users &&
               users.map((item, index) => {
                 return (
-                  <tr>
+                  <tr key={index}>
                     <th scope="row">{item.id}</th>
                     <td>{item.email}</td>
                     <td>{item.firstName}</td>

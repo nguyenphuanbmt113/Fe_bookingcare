@@ -17,7 +17,7 @@
       "manage-doctor": "Quản Lý Bác sĩ",
       "manage-admin": "Quản Lý Admin",
       "crud": "CRUD User",
-      "crud-redux": "CRUD User Redux",
+      "crud-redux": "Quản Lý Người Dùng ",
       "manage-clinic": "Quản Lý Phòng Khám",
       "clinic": "Phòng Khám",
       "speciality": "Chuyên Khoa",
@@ -41,7 +41,8 @@
       "Male": "Nam",
       "Female": "Nữ",
       "other": "Khác",
-      "Create-User":"Thêm Người Dùng"
+      "Create-User": "Thêm Người Dùng",
+      "Update-User": "Cập Nhật Người Dùng"
     }
   },
   "header": {

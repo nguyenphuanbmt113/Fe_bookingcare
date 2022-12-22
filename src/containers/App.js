@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { history } from "../redux";
-
+import "react-toastify/dist/ReactToastify.css";
 import {
   userIsAuthenticated,
-  userIsNotAuthenticated
+  userIsNotAuthenticated,
 } from "../hoc/authentication";
 
 import { path } from "../utils";
@@ -16,9 +16,7 @@ import Home from "../routes/Home";
 // import Login from "../routes/Login";
 import System from "../routes/System";
 import Login from "./Auth/Login";
-import Header from "./Header/Header";
-import HomePage from "./HomePage/HomePage"
-import { CustomToastCloseButton } from "../components/CustomToast";
+import HomePage from "./HomePage/HomePage";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -44,8 +42,6 @@ class App extends Component {
       <Fragment>
         <Router history={history}>
           <div className="main-container">
-     
-
             <span className="content-container">
               <Switch>
                 <Route path={path.HOME} exact component={Home} />
@@ -57,24 +53,20 @@ class App extends Component {
                   path={path.SYSTEM}
                   component={userIsAuthenticated(System)}
                 />
-                <Route
-                  path={path.HOMEPAGE}
-                  component={HomePage}
-                />
+                <Route path={path.HOMEPAGE} component={HomePage} />
               </Switch>
             </span>
-
             <ToastContainer
-              className="toast-container"
-              toastClassName="toast-item"
-              bodyClassName="toast-item-body"
-              autoClose={false}
-              hideProgressBar={true}
-              pauseOnHover={false}
-              pauseOnFocusLoss={true}
-              closeOnClick={false}
-              draggable={false}
-              closeButton={<CustomToastCloseButton />}
+              position="top-right"
+              autoClose={1000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
             />
           </div>
         </Router>

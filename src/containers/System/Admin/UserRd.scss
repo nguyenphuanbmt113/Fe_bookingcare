@@ -56,10 +56,27 @@
     object-fit: cover;
   }
 }
-.btn-add {
-  padding: 5px 10px;
-  background: rgb(0, 106, 255);
-  color: white;
-  border: 0;
+
+.container-header-manage {
+  max-width: 1230px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
   margin-top: 20px;
+  justify-content: space-between;
+
+  .btn-add {
+    padding: 5px 10px;
+    background: rgb(0, 106, 255);
+    color: white;
+    border: 0;
+  }
+  .title-header {
+    color: rgb(0, 98, 255);
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
 }
