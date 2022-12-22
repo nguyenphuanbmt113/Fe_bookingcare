@@ -35,6 +35,7 @@ class UserRd extends Component {
   };
 
   render() {
+    console.log("userUpdate:", this.state.userUpdate);
     return (
       <>
         <div className="container-header-manage">

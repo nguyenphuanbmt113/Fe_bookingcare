@@ -13,6 +13,7 @@ import {
   fetchRoleStart,
   fetchUpdateUser,
 } from "../../store/actions/adminActions";
+import CommonUtils from "../../utils/CommonUtils";
 class ModalUserUpdateV2 extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +43,13 @@ class ModalUserUpdateV2 extends Component {
     this.props.getRoleStart();
     this.props.getPositionStart();
 
+    let imageBase64 = "";
+    console.log("imageBase64", imageBase64);
+    if (this.props.userUpdate.image) {
+      imageBase64 = new Buffer(this.props.userUpdate.image, "base64").toString(
+        "binary"
+      );
+    }
     this.setState({
       id: this.props.userUpdate?.id,
       email: this.props.userUpdate?.email,
@@ -53,44 +61,41 @@ class ModalUserUpdateV2 extends Component {
       role: this.props.userUpdate?.roleId,
       position: this.props.userUpdate?.positionId,
       gender: this.props.userUpdate?.gender,
+      previewImg: imageBase64,
+      imgName: this.props.userUpdate?.firstName,
     });
   }
   //componen update
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.genderData !== this.props.genderData) {
-      // let arrGender = this.props.genderData;
       this.setState({
         arrGenders: this.props.genderData,
-        // gender: arrGender && arrGender.length > 0 ? arrGender[0].key : "",
       });
     }
     if (prevProps.roleData !== this.props.roleData) {
       let arrRole = this.props.roleData;
       this.setState({
         arrRoles: arrRole,
-        // role: arrRole && arrRole.length > 0 ? arrRole[0].key : "",
       });
     }
     if (prevProps.positionData !== this.props.positionData) {
       let arrPosition = this.props.positionData;
       this.setState({
         arrPositions: arrPosition,
-        // position:
-        //   arrPosition && arrPosition.length > 0 ? arrPosition[0].key : "",
       });
     }
   }
   //onchnage image
-  handleChangeImg = (e) => {
+  handleChangeImg = async (e) => {
     let file = e.target.files[0];
-    this.setState({
-      imgName: file.name,
-      image: file,
-    });
+    console.log("file", file);
     if (file) {
+      let base64 = await CommonUtils.getBase64(file);
       const imgPrev = URL.createObjectURL(file);
       this.setState({
         previewImg: imgPrev,
+        imgName: file.name,
+        image: base64,
       });
     }
   };
@@ -114,6 +119,7 @@ class ModalUserUpdateV2 extends Component {
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         isValid = false;
+        console.log(arrInput[i]);
         alert("Missing parameter: ", arrInput[i]);
         break;
       }
@@ -187,6 +193,7 @@ class ModalUserUpdateV2 extends Component {
         phonenumber: this.state.phonenumber,
         firstName: this.state.firstName,
         lastName: this.state.lastName,
+        image: this.state.image,
       });
       this.props.toggle();
     }
@@ -198,6 +205,8 @@ class ModalUserUpdateV2 extends Component {
   render() {
     let isLoadingGender = this.props.isLoadingGender;
     const { arrPositions, arrRoles, arrGenders } = this.state;
+    console.log("previewImg:", this.state.previewImg);
+    console.log(this.props.userUpdate);
     return (
       <>
         <Modal

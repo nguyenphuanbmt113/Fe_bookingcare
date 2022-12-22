@@ -6,7 +6,7 @@ import { RotatingTriangles } from "react-loader-spinner";
 import { connect } from "react-redux";
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 import "./ModalUser.scss";
-// import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
+import CommonUtils from "../../utils/CommonUtils";
 import {
   fetchAllUser,
   fetchCreateUser,
@@ -81,19 +81,20 @@ class ModalUserV2 extends Component {
         imgName: "",
         previewImg: "",
       });
+      this.props.toggle();
     }
   }
   //onchnage image
-  handleChangeImg = (e) => {
+  handleChangeImg = async (e) => {
     let file = e.target.files[0];
-    this.setState({
-      imgName: file.name,
-      image: file,
-    });
     if (file) {
+      let base64 = await CommonUtils.getBase64(file);
+      console.log("base64", base64);
       const imgPrev = URL.createObjectURL(file);
       this.setState({
         previewImg: imgPrev,
+        imgName: file.name,
+        image: base64,
       });
     }
   };
@@ -118,6 +119,7 @@ class ModalUserV2 extends Component {
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         isValid = false;
+        console.log(arrInput[i]);
         alert("Missing parameter", +arrInput[i]);
         break;
       }
@@ -179,19 +181,22 @@ class ModalUserV2 extends Component {
   };
   //submit BTN
   handleSaveUser = () => {
-    this.props.createUser({
-      email: this.state.email,
-      password: this.state.password,
-      address: this.state.address,
-      gender: this.state.gender,
-      roleId: this.state.role,
-      positionId: this.state.position,
-      phonenumber: this.state.phonenumber,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      image: this.state.image,
-    });
-    this.props.toggle();
+    let isValid = this.checkValidation();
+    if (isValid) {
+      this.props.createUser({
+        email: this.state.email,
+        password: this.state.password,
+        address: this.state.address,
+        gender: this.state.gender,
+        roleId: this.state.role,
+        positionId: this.state.position,
+        phonenumber: this.state.phonenumber,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        image: this.state.image,
+      });
+    }
+    // this.props.toggle();
   };
   //toggle
   toggle = () => {
