@@ -48,22 +48,21 @@ class ModalUserV2 extends Component {
       const arrGender = this.props.genderData;
       this.setState({
         arrGenders: arrGender,
-        gender: arrGender && arrGender.length > 0 ? arrGender[0].key : "",
+        gender: arrGender && arrGender.length > 0 ? arrGender[0].keyMap : "",
       });
     }
     if (prevProps.roleData !== this.props.roleData) {
       const arrRole = this.props.roleData;
       this.setState({
         arrRoles: arrRole,
-        role: arrRole && arrRole.length > 0 ? arrRole[0].key : "",
+        role: arrRole && arrRole.length > 0 ? arrRole[0].keyMap : "",
       });
     }
     if (prevProps.positionData !== this.props.positionData) {
       const arrPosition = this.props.positionData;
       this.setState({
         arrPositions: arrPosition,
-        position:
-          arrPosition && arrPosition.length > 0 ? arrPosition[0].key : "",
+        position: arrPosition && arrPosition.length > 0 ? arrPosition[0].keyMap : "",
       });
     }
     if (prevProps.usersData !== this.props.usersData) {
@@ -81,7 +80,7 @@ class ModalUserV2 extends Component {
         imgName: "",
         previewImg: "",
       });
-      this.props.toggle();
+      this.props.closeModal();
     }
   }
   //onchnage image
@@ -206,6 +205,7 @@ class ModalUserV2 extends Component {
   render() {
     let isLoadingGender = this.props.isLoadingGender;
     const { arrPositions, arrRoles, arrGenders } = this.state;
+    console.log(this.state);
     return (
       <>
         <Modal
@@ -331,7 +331,7 @@ class ModalUserV2 extends Component {
                           arrGenders.length > 0 &&
                           arrGenders.map((item) => {
                             return (
-                              <option key={item.id} value={item.key}>
+                              <option key={item.id} value={item.keyMap}>
                                 {this.props.lang === "vi"
                                   ? item.valueVi
                                   : item.valueEn}
@@ -355,7 +355,7 @@ class ModalUserV2 extends Component {
                           arrPositions.length > 0 &&
                           arrPositions.map((item) => {
                             return (
-                              <option key={item.id} value={item.key}>
+                              <option key={item.id} value={item.keyMap}>
                                 {this.props.lang === "vi"
                                   ? item.valueVi
                                   : item.valueEn}
@@ -377,7 +377,7 @@ class ModalUserV2 extends Component {
                           arrRoles.length > 0 &&
                           arrRoles.map((item) => {
                             return (
-                              <option key={item.id} value={item.key}>
+                              <option key={item.id} value={item?.keyMap}>
                                 {this.props.lang === "vi"
                                   ? item.valueVi
                                   : item.valueEn}

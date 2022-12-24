@@ -3,6 +3,7 @@ import {
   createNewUser,
   handleGetAllUser,
   updateUser,
+  getTopDoctorHome,
 } from "../../services/userService";
 import actionTypes from "./actionTypes";
 import { toast } from "react-toastify";
@@ -149,6 +150,33 @@ export const fetchUpdateUser = (data) => {
         dispatch(fetchAllUser());
       } else {
         dispatch(fetchUpdateUserFail());
+      }
+    } catch (error) {
+      console.log(">>check erroe:", error);
+    }
+  };
+};
+
+//getdoctorhhome
+export const fetTopDoctorSuccess = (data) => ({
+  type: actionTypes.FETCH_TOPDOCTOR_SUCCESS,
+  data,
+});
+export const fetTopDoctorFail = () => ({
+  type: actionTypes.FETCH_TOPDOCTOR_FAIL,
+});
+export const fetchTopDoctorHome = (limit) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await getTopDoctorHome(limit);
+      console.log("res", res)
+      if (res?.data?.EC === 0) {
+        dispatch(fetTopDoctorSuccess(res?.data?.DT));
+      } else {
+        dispatch(fetTopDoctorFail());
+      }
+      if (res?.data?.EC === 0) {
+      } else {
       }
     } catch (error) {
       console.log(">>check erroe:", error);

@@ -5,9 +5,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { FormattedMessage } from "react-intl";
+import { fetchTopDoctorHome } from "../../../store/actions/adminActions";
 let settings = {
-  // dots: true,
-  infinite: true,
+  infinite: false,
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 1,
@@ -17,8 +17,7 @@ let settings = {
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        infinite: true,
-        // dots: true,
+        infinite: false,
       },
     },
     {
@@ -27,6 +26,7 @@ let settings = {
         slidesToShow: 2,
         slidesToScroll: 2,
         initialSlide: 2,
+        infinite: false,
       },
     },
     {
@@ -34,12 +34,31 @@ let settings = {
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
+        infinite: false,
       },
     },
   ],
 };
 class DoctorFacility extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      topDoctorData: [],
+    };
+  }
+  componentDidMount() {
+    this.props.getTopDoctor(10);
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.topDoctor !== this.props.topDoctor) {
+      this.setState({
+        topDoctorData: this.props.topDoctor,
+      });
+    }
+  }
   render() {
+    console.log("top doctt:", this.props.topDoctor);
+    const { topDoctorData } = this.state;
     return (
       <div className="section-container section-doctor">
         <div className="section-content">
@@ -55,88 +74,32 @@ class DoctorFacility extends Component {
           </div>
           <div className="slick-container">
             <Slider {...settings}>
-              <div className="doctor-container">
-                <div className="image-doctor">
-                  <img
-                    src="https://images.unsplash.com/photo-1670766167104-f8c0d4561708?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60"
-                    alt=""
-                  />
-                </div>
-                <div className="title-doctor">
-                  Bác sĩ Chuyên khoa II Trần Minh Khuyên
-                </div>
-                <div className="title-doctor2">
-                  khoa lâm sàng, Bệnh tâm thần Thành phố Hồ Chí Minh
-                </div>
-              </div>
-              <div className="doctor-container">
-                <div className="image-doctor">
-                  <img
-                    src="https://images.unsplash.com/photo-1670766167104-f8c0d4561708?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60"
-                    alt=""
-                  />
-                </div>
-                <div className="title-doctor">
-                  Bác sĩ Chuyên khoa II Trần Minh Khuyên
-                </div>
-                <div className="title-doctor2">
-                  khoa lâm sàng, Bệnh tâm thần Thành phố Hồ Chí Minh
-                </div>
-              </div>
-              <div className="doctor-container">
-                <div className="image-doctor">
-                  <img
-                    src="https://images.unsplash.com/photo-1670766167104-f8c0d4561708?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60"
-                    alt=""
-                  />
-                </div>
-                <div className="title-doctor">Bác sĩ Chuyên khoa II</div>
-                <div className="title-doctor2">
-                  khoa lâm sàng, Bệnh tâm thần Thành
-                </div>
-              </div>
-              <div className="doctor-container">
-                <div className="image-doctor">
-                  <img
-                    src="https://images.unsplash.com/photo-1670766167104-f8c0d4561708?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60"
-                    alt=""
-                  />
-                </div>
-                <div className="title-doctor">
-                  Bác sĩ Chuyên khoa II Trần Minh Khuyên
-                </div>
-                <div className="title-doctor2">
-                  khoa lâm sàng, Bệnh tâm thần Thành phố Hồ Chí Minh
-                </div>
-              </div>
-              <div className="doctor-container">
-                <div className="image-doctor">
-                  <img
-                    src="https://images.unsplash.com/photo-1670766167104-f8c0d4561708?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60"
-                    alt=""
-                  />
-                </div>
-                <div className="title-doctor">
-                  Bác sĩ Chuyên khoa II Trần Minh Khuyên
-                </div>
-                <div className="title-doctor2">
-                  khoa lâm sàng, Bệnh tâm thần Thành phố Hồ Chí Minh
-                </div>
-              </div>
-              <div className="doctor-container">
-                <div className="image-doctor">
-                  <img
-                    src="https://images.unsplash.com/photo-1670766167104-f8c0d4561708?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=400&q=60"
-                    alt=""
-                  />
-                </div>
-                <div className="title-doctor">
-                  Bác sĩ Chuyên khoa II Trần Minh Khuyên
-                </div>
-                <div className="title-doctor2">
-                  khoa lâm sàng, Bệnh tâm thần Thành phố Hồ Chí Minh
-                </div>
-              </div>
+              {topDoctorData &&
+                topDoctorData.length > 0 &&
+                topDoctorData.map((item, index) => {
+                  let nameVi = `${item.positionData.valueVi}, ${item.firstName} ${item.lastName}`;
+                  let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
+                  let imageBase64 = "";
+                  console.log("imageBase64", imageBase64);
+                  if (item.image) {
+                    imageBase64 = new Buffer(item.image, "base64").toString(
+                      "binary"
+                    );
+                  }
+                  return (
+                    <div className="doctor-container" key={index}>
+                      <div className="image-doctor">
+                        <img src={imageBase64} alt="" />
+                      </div>
+                      <div className="title-doctor">
+                        {this.props.lang === "vi" ? nameVi : nameEn}
+                      </div>
+                      {/* <div className="title-doctor2">
+                        khoa lâm sàng, Bệnh tâm thần Thành phố Hồ Chí Minh
+                      </div> */}
+                    </div>
+                  );
+                })}
             </Slider>
           </div>
         </div>
@@ -146,11 +109,16 @@ class DoctorFacility extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    topDoctor: state.admin.topDoctor,
+    lang: state.app.language,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    getTopDoctor: (limit) => dispatch(fetchTopDoctorHome(limit)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DoctorFacility);

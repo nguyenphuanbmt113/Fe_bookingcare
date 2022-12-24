@@ -205,8 +205,6 @@ class ModalUserUpdateV2 extends Component {
   render() {
     let isLoadingGender = this.props.isLoadingGender;
     const { arrPositions, arrRoles, arrGenders } = this.state;
-    console.log("previewImg:", this.state.previewImg);
-    console.log(this.props.userUpdate);
     return (
       <>
         <Modal
@@ -252,20 +250,6 @@ class ModalUserUpdateV2 extends Component {
                         onChange={(e) => this.handleOnchnageInput(e, "EMAIL")}
                       />
                     </div>
-                    {/* <div className="col-3">
-                      <label className="form-label">
-                        {" "}
-                        <FormattedMessage id="menu.manage-user.password"></FormattedMessage>
-                      </label>
-                      <input
-                        type="password"
-                        className="form-control"
-                        value={this.state.password}
-                        onChange={(e) =>
-                          this.handleOnchnageInput(e, "PASSWORD")
-                        }
-                      />
-                    </div> */}
                     <div className="col-3">
                       <label className="form-label">
                         {" "}
@@ -332,7 +316,7 @@ class ModalUserUpdateV2 extends Component {
                           arrGenders.length > 0 &&
                           arrGenders.map((item) => {
                             return (
-                              <option key={item.id} value={item.key}>
+                              <option key={item.id} value={item.keyMap}>
                                 {this.props.lang === "vi"
                                   ? item.valueVi
                                   : item.valueEn}
@@ -356,7 +340,7 @@ class ModalUserUpdateV2 extends Component {
                           arrPositions.length > 0 &&
                           arrPositions.map((item) => {
                             return (
-                              <option key={item.id} value={item.key}>
+                              <option key={item.id} value={item.keyMap}>
                                 {this.props.lang === "vi"
                                   ? item.valueVi
                                   : item.valueEn}
@@ -378,7 +362,7 @@ class ModalUserUpdateV2 extends Component {
                           arrRoles.length > 0 &&
                           arrRoles.map((item) => {
                             return (
-                              <option key={item.id} value={item.key}>
+                              <option key={item.id} value={item.keyMap}>
                                 {this.props.lang === "vi"
                                   ? item.valueVi
                                   : item.valueEn}

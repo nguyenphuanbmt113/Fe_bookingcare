@@ -3,14 +3,13 @@ import "react-image-lightbox/style.css";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { fetchCreateUser } from "../../../store/actions/adminActions";
-import MarkDown from "../MarkDown";
 import ModalMarkDown from "../ModalMarkDown";
 import ModalUserUpdateV2 from "../ModalUserUpdateV2";
 import ModalUserV2 from "../ModalUserV2";
 // import ModalUserV2 from "../ModalUserV2";
 import TableUser from "./TableUser";
 import "./UserRd.scss";
-class UserRd extends Component {
+class ManageDoctor extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,14 +63,14 @@ class UserRd extends Component {
           <div className="title-header mb-1">
             <FormattedMessage id="menu.manage-user.manage-user"></FormattedMessage>
           </div>
-          <div>
+          {/* <div>
             <button onClick={() => this.toggle()} className="btn-add mr-2">
               <FormattedMessage id="menu.manage-user.Create-User"></FormattedMessage>
             </button>
             <button className="btn-add" onClick={() => this.toggleMarkDown()}>
               Mark Down
             </button>
-          </div>
+          </div> */}
         </div>
         <TableUser
           toggle={this.toggleUpdateModal}
@@ -110,4 +109,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserRd);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageDoctor);
