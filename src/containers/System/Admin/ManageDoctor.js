@@ -3,12 +3,13 @@ import "react-image-lightbox/style.css";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { fetchCreateUser } from "../../../store/actions/adminActions";
+import MarkDown from "../MarkDown";
 import ModalMarkDown from "../ModalMarkDown";
 import ModalUserUpdateV2 from "../ModalUserUpdateV2";
 import ModalUserV2 from "../ModalUserV2";
 // import ModalUserV2 from "../ModalUserV2";
-import TableUser from "./TableUser";
 import "./UserRd.scss";
+import "./ManageDoctor.scss";
 class ManageDoctor extends Component {
   constructor(props) {
     super(props);
@@ -61,20 +62,23 @@ class ManageDoctor extends Component {
       <>
         <div className="container-header-manage">
           <div className="title-header mb-1">
-            <FormattedMessage id="menu.manage-user.manage-user"></FormattedMessage>
+            <FormattedMessage id="menu.admin.manage-doctor"></FormattedMessage>
           </div>
-          {/* <div>
+          <div>
             <button onClick={() => this.toggle()} className="btn-add mr-2">
               <FormattedMessage id="menu.manage-user.Create-User"></FormattedMessage>
             </button>
             <button className="btn-add" onClick={() => this.toggleMarkDown()}>
-              Mark Down
+              <FormattedMessage id="menu.manage-user.createMarkdown"></FormattedMessage>
             </button>
-          </div> */}
+          </div>
         </div>
-        <TableUser
+        {/* <TableUser
           toggle={this.toggleUpdateModal}
-          getUpdateModal={this.getUpdateModal}></TableUser>
+          getUpdateModal={this.getUpdateModal}></TableUser> */}
+        <div className="container-markdown">
+          <MarkDown></MarkDown>
+        </div>
         {this.state.isShow === true && (
           <ModalUserV2
             isShow={this.state.isShow}

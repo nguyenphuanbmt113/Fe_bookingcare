@@ -4,6 +4,8 @@ import {
   handleGetAllUser,
   updateUser,
   getTopDoctorHome,
+  getAllDoctor,
+  saveInfoDoctor,
 } from "../../services/userService";
 import actionTypes from "./actionTypes";
 import { toast } from "react-toastify";
@@ -169,16 +171,62 @@ export const fetchTopDoctorHome = (limit) => {
   return async (dispatch, getState) => {
     try {
       const res = await getTopDoctorHome(limit);
-      console.log("res", res)
+      console.log("res", res);
       if (res?.data?.EC === 0) {
         dispatch(fetTopDoctorSuccess(res?.data?.DT));
       } else {
         dispatch(fetTopDoctorFail());
       }
+    } catch (error) {
+      console.log(">>check erroe:", error);
+    }
+  };
+};
+
+//getALLdoctor
+export const fetAllDoctorSuccess = (data) => ({
+  type: actionTypes.FETCH_ALLDOCTOR_SUCCESS,
+  data,
+});
+export const fetAllDoctorFail = () => ({
+  type: actionTypes.FETCH_TOPDOCTOR_FAIL,
+});
+export const fetchAllDoctor = () => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await getAllDoctor();
+
       if (res?.data?.EC === 0) {
+        dispatch(fetAllDoctorSuccess(res?.data?.DT));
       } else {
+        dispatch(fetAllDoctorFail());
       }
     } catch (error) {
+      console.log(">>check erroe:", error);
+    }
+  };
+};
+
+//postInfodoctor
+export const fetInfoDoctorSuccess = () => ({
+  type: actionTypes.FETCH_INFODOCTOR_SUCCESS,
+});
+export const fetInfoDoctorFail = () => ({
+  type: actionTypes.FETCH_INFODOCTOR_FAIL,
+});
+export const fetchInfoDoctor = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      const res = await saveInfoDoctor(data);
+      if (res?.data?.EC === 0) {
+        toast.success(res?.data?.EM);
+        dispatch(fetInfoDoctorSuccess());
+      } else {
+        toast.error(res?.data?.EM);
+        dispatch(fetInfoDoctorFail());
+      }
+    } catch (error) {
+      toast.error('Error Something!');
       console.log(">>check erroe:", error);
     }
   };

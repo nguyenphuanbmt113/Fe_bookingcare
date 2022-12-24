@@ -25,6 +25,12 @@ const getAllcodesBytype = (type) => {
 const getTopDoctorHome = (limit) => {
   return axios.get(`api/v1/top-doctor-home?limit=${limit}`);
 };
+const getAllDoctor = () => {
+  return axios.get(`api/v1/doctor-all`);
+};
+const saveInfoDoctor = (data) => {
+  return axios.post(`api/v1/create-info-doctor`, data);
+};
 export {
   handleLogin,
   handleGetAllUser,
@@ -33,4 +39,6 @@ export {
   updateUser,
   getAllcodesBytype,
   getTopDoctorHome,
+  getAllDoctor,
+  saveInfoDoctor,
 };

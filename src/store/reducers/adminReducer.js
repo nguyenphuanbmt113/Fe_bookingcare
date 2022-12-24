@@ -8,6 +8,8 @@ const initialState = {
   isLoadingGender: false,
   idLoadingSave: false,
   topDoctor: [],
+  allDoctor: [],
+  isCorrectSaveInfo: false,
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -61,7 +63,6 @@ const adminReducer = (state = initialState, action) => {
         ...state,
       };
     case actionTypes.FETCH_TOPDOCTOR_SUCCESS:
-      console.log("action:", action);
       return {
         ...state,
         topDoctor: action.data,
@@ -70,6 +71,26 @@ const adminReducer = (state = initialState, action) => {
       return {
         topDoctor: [],
         ...state,
+      };
+    case actionTypes.FETCH_ALLDOCTOR_SUCCESS:
+      return {
+        ...state,
+        allDoctor: action.data,
+      };
+    case actionTypes.FETCH_ALLDOCTOR_FAIL:
+      return {
+        ...state,
+        allDoctor: [],
+      };
+    case actionTypes.FETCH_INFODOCTOR_SUCCESS:
+      return {
+        ...state,
+        isCorrectSaveInfo: true,
+      };
+    case actionTypes.FETCH_INFODOCTOR_FAIL:
+      return {
+        ...state,
+        isCorrectSaveInfo: false,
       };
 
     default:

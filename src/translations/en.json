@@ -15,6 +15,8 @@
     },
     "manage-user": {
       "manage-user": "Manage User",
+      "createDoctor": "Create Doctor",
+      "createMarkdown": "Create MarkDown",
       "createUser": "Create User",
       "email": "Email",
       "password": "Password",

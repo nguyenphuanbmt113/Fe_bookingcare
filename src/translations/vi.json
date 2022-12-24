@@ -28,6 +28,8 @@
     "manage-user": {
       "manage-user": "Quản Lý Người Dùng",
       "createUser": " Thêm Mới Người Dùng",
+      "createMarkdown": " Thêm Thông Tin Cho Bác Sĩ",
+      "createDoctor": " Thêm Mới Bác Sĩ",
       "email": "Email",
       "password": "Mật Khẩu",
       "firstName": "Họ",

@@ -6,13 +6,18 @@ import { connect } from "react-redux";
 const mdParser = new MarkdownIt();
 // import "./MarkDown.scss";
 class MarkDown extends Component {
-  handleEditorChange({ html, text }) {
-    console.log("handleEditorChange", html, text);
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
+  handleEditorChange = ({ html, text }) => {
+    console.log("handleEditorChange", html, text);
+    this.props.setContent(html, text);
+  };
   render() {
     return (
       <MdEditor
-        style={{ height: "500px" }}
+        style={{ height: "400px" }}
         renderHTML={(text) => mdParser.render(text)}
         onChange={this.handleEditorChange}
       />
