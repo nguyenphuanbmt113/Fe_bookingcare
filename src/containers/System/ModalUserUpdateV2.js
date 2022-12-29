@@ -44,7 +44,6 @@ class ModalUserUpdateV2 extends Component {
     this.props.getPositionStart();
 
     let imageBase64 = "";
-    console.log("imageBase64", imageBase64);
     if (this.props.userUpdate.image) {
       imageBase64 = new Buffer(this.props.userUpdate.image, "base64").toString(
         "binary"
@@ -88,7 +87,6 @@ class ModalUserUpdateV2 extends Component {
   //onchnage image
   handleChangeImg = async (e) => {
     let file = e.target.files[0];
-    console.log("file", file);
     if (file) {
       let base64 = await CommonUtils.getBase64(file);
       const imgPrev = URL.createObjectURL(file);

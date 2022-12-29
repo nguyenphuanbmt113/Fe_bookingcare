@@ -24,6 +24,7 @@ class Login extends Component {
       password: e.target.value,
     });
   };
+  //login submit
   handleLogin = async () => {
     this.setState({
       errorMess: "",
@@ -41,6 +42,13 @@ class Login extends Component {
       this.setState({
         errorMess: error.response.data.EM,
       });
+    }
+  };
+  //keydown
+  handleKeydown = (e) => {
+    console.log("absd");
+    if (e.key === "Enter") {
+      this.handleLogin();
     }
   };
   render() {
@@ -71,6 +79,7 @@ class Login extends Component {
                       placeholder="Password"
                       value={this.state.password}
                       onChange={(e) => this.handleInputPassword(e)}
+                      onKeyDown={(e) => this.handleKeydown(e)}
                     />
                     {/* <i class="fa-solid fa-eye"></i> */}
                   </div>

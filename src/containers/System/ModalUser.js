@@ -84,7 +84,7 @@ class ModalUser extends Component {
         toggle={() => this.toggle()}
         size={"lg"}
         centered>
-        <ModalHeader toggle={() => this.toggle()} close={() => this.closeBtn()}>
+        <ModalHeader toggle={() => this.toggle()}>
           Create User
         </ModalHeader>
         <ModalBody>

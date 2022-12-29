@@ -25,6 +25,10 @@
       "handbook": "Cẩm Năng",
       "manage-handbook": "Quản Lý Cẩm Năng"
     },
+    "doctor": {
+      "manage-schedule": "Quản Lý Lịch Khám Bệnh",
+      "schedule": "Lịch Khám Bệnh"
+    },
     "manage-user": {
       "manage-user": "Quản Lý Người Dùng",
       "createUser": " Thêm Mới Người Dùng",
@@ -45,6 +49,11 @@
       "other": "Khác",
       "Create-User": "Thêm Người Dùng",
       "Update-User": "Cập Nhật Người Dùng"
+    },
+    "m-s": {
+      "title": "Quản Lý Kế Hoạch Khám Bệnh",
+      "chooseDoctor": "Chọn Bác Sĩ",
+      "chooseDate": "Chọn Ngày"
     }
   },
   "header": {

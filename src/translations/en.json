@@ -13,6 +13,15 @@
       "handbook": "Handbook",
       "manage-handbook": "Manage Handbook"
     },
+    "doctor": {
+      "manage-schedule": "Manage Schedule",
+      "schedule": "Schedule"
+    },
+    "m-s": {
+      "title": "Manage Schedule",
+      "chooseDoctor": "Choose Doctor",
+      "chooseDate": "Choose Date"
+    },
     "manage-user": {
       "manage-user": "Manage User",
       "createDoctor": "Create Doctor",

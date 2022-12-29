@@ -1,0 +1,51 @@
+.detail-container {
+  height: 500px;
+  padding: 0 20px;
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #555;
+  font-size: 13px;
+
+  .intro-doctor {
+    display: flex;
+
+    .content-left {
+      width: 20%;
+      width: 120px;
+      height: 120px;
+      background: white;
+
+      img {
+        border-radius: 100rem;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .content-right {
+      width: 80%;
+      max-width: 650px;
+      padding-left: 15px;
+
+      .doctor-title {
+        font-size: 27px;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+    }
+  }
+  .schedule-doctor {
+    display: flex;
+    margin: 15px 0;
+
+    .content-left {
+      border-right: 1px solid rgb(180, 180, 180);
+      width: 60%;
+      padding: 10px 10px;
+    }
+    .content-right {
+      width: 40%;
+    }
+  }
+}

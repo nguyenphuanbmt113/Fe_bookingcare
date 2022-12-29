@@ -153,6 +153,7 @@ class DatePicker extends Component {
     return (
       <Flatpickr
         ref={this.nodeRef}
+        placeholder="Date..."
         value={value}
         onChange={onChange}
         options={options}

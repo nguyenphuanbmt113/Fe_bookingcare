@@ -116,7 +116,7 @@ class UserManage extends Component {
             {userData &&
               userData.map((item, index) => {
                 return (
-                  <tr>
+                  <tr key={index}>
                     <th scope="row">{item.id}</th>
                     <td>{item.email}</td>
                     <td>{item.firstName}</td>

@@ -56,8 +56,6 @@ class ManageDoctor extends Component {
   };
 
   render() {
-    console.log("isShow:", this.state.isShow);
-    console.log("userUpdate:", this.state.userUpdate);
     return (
       <>
         <div className="container-header-manage">
@@ -73,9 +71,6 @@ class ManageDoctor extends Component {
             </button>
           </div>
         </div>
-        {/* <TableUser
-          toggle={this.toggleUpdateModal}
-          getUpdateModal={this.getUpdateModal}></TableUser> */}
         <div className="container-markdown">
           <MarkDown></MarkDown>
         </div>

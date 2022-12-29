@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
-import _ from "lodash";
-// import PropTypes from "prop-types";
+
 import { connect } from "react-redux";
 class ModalUpdateUser extends Component {
   constructor(props) {

@@ -5,7 +5,7 @@ import Header from "../containers/Header/Header";
 import ManageDoctor from "../containers/System/Admin/ManageDoctor";
 import UserRd from "../containers/System/Admin/UserRd";
 import UserManage from "../containers/System/UserManage";
-
+import "./System.scss"
 class System extends Component {
   render() {
     const { systemMenuPath } = this.props;

@@ -10,6 +10,12 @@ const initialState = {
   topDoctor: [],
   allDoctor: [],
   isCorrectSaveInfo: false,
+  scheduleDoctor: [],
+
+  //INFO DOCTOR
+  arrPrice: [],
+  arrPayment: [],
+  arrProvice: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -91,6 +97,48 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         isCorrectSaveInfo: false,
+      };
+    case actionTypes.FETCH_TIMEDOCTOR_SUCCESS:
+      return {
+        ...state,
+        scheduleDoctor: action.data,
+      };
+    case actionTypes.FETCH_TIMEDOCTOR_FAIL:
+      return {
+        ...state,
+        scheduleDoctor: [],
+      };
+    case actionTypes.FETCH_PRICEDOCTOR_SUCCESS:
+      return {
+        ...state,
+        arrPrice: action.data,
+      };
+    case actionTypes.FETCH_PRICEDOCTOR_FAIL:
+      return {
+        ...state,
+        arrPrice: [],
+      };
+    case actionTypes.FETCH_PAYMENTDOCTOR_SUCCESS:
+      console.log(action);
+      return {
+        ...state,
+        arrPayment: action.data,
+      };
+    case actionTypes.FETCH_PAYMENTDOCTOR_FAIL:
+      return {
+        ...state,
+        arrPayment: [],
+      };
+    case actionTypes.FETCH_PROVICEDOCTOR_SUCCESS:
+      console.log(action);
+      return {
+        ...state,
+        arrProvice: action.data,
+      };
+    case actionTypes.FETCH_PROVICEDOCTOR_FAIL:
+      return {
+        ...state,
+        arrProvice: [],
       };
 
     default:

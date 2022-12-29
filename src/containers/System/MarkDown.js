@@ -11,7 +11,6 @@ class MarkDown extends Component {
     this.state = {};
   }
   handleEditorChange = ({ html, text }) => {
-    console.log("handleEditorChange", html, text);
     this.props.setContent(html, text);
   };
   render() {
@@ -20,6 +19,7 @@ class MarkDown extends Component {
         style={{ height: "400px" }}
         renderHTML={(text) => mdParser.render(text)}
         onChange={this.handleEditorChange}
+        value={this.props?.contentMarkdown || ""}
       />
     );
   }

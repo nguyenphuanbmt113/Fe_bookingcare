@@ -226,8 +226,106 @@ export const fetchInfoDoctor = (data) => {
         dispatch(fetInfoDoctorFail());
       }
     } catch (error) {
-      toast.error('Error Something!');
+      toast.error("Error Something!");
       console.log(">>check erroe:", error);
+    }
+  };
+};
+
+//GET TIME DOCTOR
+export const fetTimeDoctorSuccess = (data) => ({
+  type: actionTypes.FETCH_TIMEDOCTOR_SUCCESS,
+  data,
+});
+export const fetTimeDoctorFail = () => ({
+  type: actionTypes.FETCH_TIMEDOCTOR_FAIL,
+});
+export const fetchTimeDoctor = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllcodesBytype("time");
+      if (res?.data?.EC === 0) {
+        dispatch(fetTimeDoctorSuccess(res?.data?.DT));
+      } else {
+        dispatch(fetTimeDoctorFail());
+      }
+    } catch (error) {
+      console.log(">>check erroe:", error);
+    }
+  };
+};
+
+//price
+export const fetchPriceSuceess = (data) => ({
+  type: actionTypes.FETCH_PRICEDOCTOR_SUCCESS,
+  data,
+});
+export const fetchPriceFail = () => ({
+  type: actionTypes.FETCH_PRICEDOCTOR_FAIL,
+});
+export const fetchPrice = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllcodesBytype("price");
+
+      if (res?.data.EC === 0) {
+        dispatch(fetchPriceSuceess(res?.data?.DT));
+      } else {
+        dispatch(fetchPriceFail());
+      }
+    } catch (error) {
+      dispatch(fetchPriceFail());
+      console.log(">>checek err:", error);
+    }
+  };
+};
+
+//provice
+export const fetchProviceSuceess = (data) => ({
+  type: actionTypes.FETCH_PROVICEDOCTOR_SUCCESS,
+  data: data,
+});
+export const fetchProviceFail = () => ({
+  type: actionTypes.FETCH_PROVICEDOCTOR_FAIL,
+});
+export const fetchProvice = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllcodesBytype("province");
+      console.log("res", res);
+
+      if (res?.data.EC === 0) {
+        dispatch(fetchProviceSuceess(res?.data?.DT));
+      } else {
+        dispatch(fetchProviceFail());
+      }
+    } catch (error) {
+      dispatch(fetchProviceFail());
+      console.log(">>checek err:", error);
+    }
+  };
+};
+
+//payment
+export const fetchPaymentSuceess = (data) => ({
+  type: actionTypes.FETCH_PAYMENTDOCTOR_SUCCESS,
+  data,
+});
+export const fetchPaymentFail = () => ({
+  type: actionTypes.FETCH_PAYMENTDOCTOR_FAIL,
+});
+export const fetchPayment = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getAllcodesBytype("payment");
+      if (res?.data.EC === 0) {
+        dispatch(fetchPaymentSuceess(res?.data?.DT));
+      } else {
+        dispatch(fetchPaymentFail());
+      }
+    } catch (error) {
+      dispatch(fetchPaymentFail());
+      console.log(">>checek err:", error);
     }
   };
 };

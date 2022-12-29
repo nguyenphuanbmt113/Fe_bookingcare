@@ -11,7 +11,7 @@ class HomePage extends Component {
   render() {
     return (
       <>
-        <Header></Header>
+        <Header isShowBanner={true}></Header>
         <Specialization></Specialization>
         <MedicalFacility></MedicalFacility>
         <DoctorFacility></DoctorFacility>

@@ -88,7 +88,6 @@ class ModalUserV2 extends Component {
     let file = e.target.files[0];
     if (file) {
       let base64 = await CommonUtils.getBase64(file);
-      console.log("base64", base64);
       const imgPrev = URL.createObjectURL(file);
       this.setState({
         previewImg: imgPrev,
@@ -205,7 +204,6 @@ class ModalUserV2 extends Component {
   render() {
     let isLoadingGender = this.props.isLoadingGender;
     const { arrPositions, arrRoles, arrGenders } = this.state;
-    console.log(this.state);
     return (
       <>
         <Modal
