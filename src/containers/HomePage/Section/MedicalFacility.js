@@ -2,13 +2,18 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import Slider from "react-slick";
+import { getAllClinic } from "../../../services/userService";
 import "../HomePage.scss";
+import { withRouter } from "react-router";
 let settings = {
-  // dots: true,
+  speed: 2000,
+  autoplay: true,
   infinite: true,
-  speed: 500,
   slidesToShow: 4,
   slidesToScroll: 1,
+  draggable: true,
+  pauseOnHover: true,
+  dots: true,
   responsive: [
     {
       breakpoint: 1024,
@@ -36,8 +41,28 @@ let settings = {
     },
   ],
 };
+
 class MedicalFacility extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      listClinic: "",
+    };
+  }
+  async componentDidMount() {
+    const res = await getAllClinic();
+    if (res.data.EC === 0) {
+      this.setState({
+        listClinic: res.data.DT || [],
+      });
+    }
+  }
+  handleViewDetailClinic = (item) => {
+    this.props.history.push(`detail-clinic/${item.id}`);
+  };
   render() {
+    console.log("listClinic", this.state.listClinic);
+    const { listClinic } = this.state;
     return (
       <>
         <div className="section-container section-white">
@@ -54,41 +79,20 @@ class MedicalFacility extends Component {
             </div>
             <div className="slick-container">
               <Slider {...settings}>
-                <div className="img-container">
-                  <img
-                    src="https://4kwallpapers.com/images/walls/thumbs_2t/1271.jpg"
-                    alt=""
-                    className=""
-                  />
-                </div>
-                <div className="img-container">
-                  <img
-                    src="https://4kwallpapers.com/images/walls/thumbs_2t/1272.jpg"
-                    alt=""
-                    className=""
-                  />
-                </div>
-                <div className="img-container">
-                  <img
-                    src="https://4kwallpapers.com/images/walls/thumbs_2t/2330.jpg"
-                    alt=""
-                    className=""
-                  />
-                </div>
-                <div className="img-container">
-                  <img
-                    src="https://4kwallpapers.com/images/walls/thumbs_2t/1270.jpg"
-                    alt=""
-                    className=""
-                  />
-                </div>
-                <div className="img-container">
-                  <img
-                    src="https://4kwallpapers.com/images/walls/thumbs_2t/4120.png"
-                    alt=""
-                    className=""
-                  />
-                </div>
+                {listClinic &&
+                  listClinic.length > 0 &&
+                  listClinic.map((item, index) => {
+                    return (
+                      <div
+                        key={index}
+                        onClick={() => this.handleViewDetailClinic(item)}>
+                        <div className="img-container">
+                          <img src={item.image} alt="" className="" />
+                        </div>
+                        <div className="name-clinic">{item.name}</div>
+                      </div>
+                    );
+                  })}
               </Slider>
             </div>
           </div>
@@ -106,4 +110,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MedicalFacility)
+);

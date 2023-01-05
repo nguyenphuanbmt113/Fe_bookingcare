@@ -48,7 +48,9 @@ class Header extends Component {
         <div className="header-left">
           <div className="language">
             <span
-              className={`img-flag ${this.props.lang === "vi" && "text-black"}`}
+              className={`img-flag ${
+                this.props.lang === "vi" && "active-flag"
+              }`}
               onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}>
               <img
                 src="https://png.pngtree.com/png-clipart/20210725/original/pngtree-irregular-dry-ink-brush-vietnam-flag-png-image_6563885.jpg"
@@ -56,7 +58,9 @@ class Header extends Component {
               />
             </span>
             <span
-              className={`img-flag ${this.props.lang === "en" && "text-black"}`}
+              className={`img-flag ${
+                this.props.lang === "en" && "active-flag"
+              }`}
               onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}>
               <img
                 src="https://banner2.cleanpng.com/20180623/iwt/kisspng-flag-of-the-united-kingdom-flag-of-great-britain-e-northern-ireland-flags-issue-5b2efb1c7a74b4.9896211915298055965016.jpg"

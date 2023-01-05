@@ -23,8 +23,9 @@
       padding: 5px 10px;
       background: rgb(255, 225, 0);
       font-weight: 500;
-      font-size: 15px;
+      font-size: 13px;
       border: 1px solid rgb(220, 220, 220);
+      cursor: pointer;
 
       &:hover {
         background: rgb(225, 218, 23);
@@ -34,7 +35,7 @@
   }
   .text-not {
     padding: 5px 15px;
-    background: rgba(255, 230, 0, 0.856);
+    background: rgba(255, 240, 108, 0.856);
 
   }
 }

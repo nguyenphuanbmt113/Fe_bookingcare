@@ -329,3 +329,9 @@ export const fetchPayment = () => {
     }
   };
 };
+
+//loading
+export const fetchLoading = (flag) => ({
+  type: actionTypes.FETCH_LOADING,
+  flag,
+});

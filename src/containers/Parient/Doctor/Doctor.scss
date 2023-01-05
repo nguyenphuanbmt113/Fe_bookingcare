@@ -37,15 +37,16 @@
   }
   .schedule-doctor {
     display: flex;
+    align-items: start;
     margin: 15px 0;
-
     .content-left {
-      border-right: 1px solid rgb(180, 180, 180);
       width: 60%;
       padding: 10px 10px;
+      border-right: 1px solid rgb(180, 180, 180);
     }
     .content-right {
       width: 40%;
+      padding: 10px 20px;
     }
   }
 }

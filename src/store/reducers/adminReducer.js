@@ -16,6 +16,8 @@ const initialState = {
   arrPrice: [],
   arrPayment: [],
   arrProvice: [],
+  //isloadinh
+  isLoadingRedux: true,
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -119,7 +121,6 @@ const adminReducer = (state = initialState, action) => {
         arrPrice: [],
       };
     case actionTypes.FETCH_PAYMENTDOCTOR_SUCCESS:
-      console.log(action);
       return {
         ...state,
         arrPayment: action.data,
@@ -130,7 +131,6 @@ const adminReducer = (state = initialState, action) => {
         arrPayment: [],
       };
     case actionTypes.FETCH_PROVICEDOCTOR_SUCCESS:
-      console.log(action);
       return {
         ...state,
         arrProvice: action.data,
@@ -139,6 +139,11 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         arrProvice: [],
+      };
+    case actionTypes.FETCH_LOADING:
+      return {
+        ...state,
+        isLoadingRedux: action.flag,
       };
 
     default:

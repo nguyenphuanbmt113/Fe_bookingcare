@@ -1,13 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import Header from "./Header";
+import "./HomePage.scss";
+import AboutSection from "./Section/About";
+import DoctorFacility from "./Section/DoctorFacility";
+import Footer from "./Section/Footer";
+import HandBook from "./Section/HandBook";
+import IntroApp from "./Section/IntroApp";
 import MedicalFacility from "./Section/MedicalFacility";
 import Specialization from "./Section/Specialization";
-import "./HomePage.scss";
-import DoctorFacility from "./Section/DoctorFacility";
-import HandBook from "./Section/HandBook";
-import AboutSection from "./Section/About";
 class HomePage extends Component {
+  // componentDidMount() {
+  //   window.scrollTo(0, 0);
+  // }
+  // componentDidUpdate = (prevProps) => {
+  //   if (this.props.location !== prevProps.location) {
+  //     console.log("chay");
+  //     window.scrollTo(0, 0);
+  //   }
+  // };
+
   render() {
     return (
       <>
@@ -17,7 +30,8 @@ class HomePage extends Component {
         <DoctorFacility></DoctorFacility>
         <HandBook></HandBook>
         <AboutSection></AboutSection>
-        {/* <div className="h"></div> */}
+        <IntroApp></IntroApp>
+        <Footer></Footer>
       </>
     );
   }
@@ -31,4 +45,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HomePage)
+);

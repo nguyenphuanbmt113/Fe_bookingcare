@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { geteDetailInfoDoctor } from "../../../services/userService";
 import Header from "../../HomePage/Header";
+import DoctorExtraInfor from "../../System/Doctor/DoctorExtraInfor";
 import "./Doctor.scss";
 import DoctorSchedule from "./DoctorSchedule";
 class DetailDoctor extends Component {
@@ -59,7 +60,10 @@ class DetailDoctor extends Component {
               <DoctorSchedule
                 doctorId={this.props.match.params.id}></DoctorSchedule>
             </div>
-            <div className="content-right"></div>
+            <div className="content-right">
+              <DoctorExtraInfor
+                doctorId={this.props.match.params.id}></DoctorExtraInfor>
+            </div>
           </div>
           <div className="detail-info-doctor mt-3">
             <div
@@ -67,6 +71,7 @@ class DetailDoctor extends Component {
                 __html: detailDoctor?.Markdown?.contentHTML,
               }}></div>
           </div>
+
           <div className="comment-doctor"></div>
         </div>
       </>

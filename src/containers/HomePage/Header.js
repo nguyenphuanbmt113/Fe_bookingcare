@@ -85,7 +85,7 @@ class Header extends Component {
             <div className="right-content">
               <span
                 onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}
-                className={`cursor img-flag ${lang === "vi" && "text-blue"}`}>
+                className={`cursor img-flag ${lang === "vi" && "active-flag"}`}>
                 <img
                   src="https://png.pngtree.com/png-clipart/20210725/original/pngtree-irregular-dry-ink-brush-vietnam-flag-png-image_6563885.jpg"
                   alt=""
@@ -93,7 +93,7 @@ class Header extends Component {
               </span>
               <span
                 onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}
-                className={`cursor img-flag ${lang === "en" && "text-blue"}`}>
+                className={`cursor img-flag ${lang === "en" && "active-flag"}`}>
                 <img
                   src="https://banner2.cleanpng.com/20180623/iwt/kisspng-flag-of-the-united-kingdom-flag-of-great-britain-e-northern-ireland-flags-issue-5b2efb1c7a74b4.9896211915298055965016.jpg"
                   alt=""

@@ -5,8 +5,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { FormattedMessage } from "react-intl";
+import { getSpecialty } from "../../../services/userService";
+import { withRouter } from "react-router";
+import { fetchLoading } from "../../../store/actions/adminActions";
+// import { RotatingTriangles } from "react-loader-spinner";
 let settings = {
-  // dots: true,
   infinite: true,
   speed: 500,
   slidesToShow: 4,
@@ -18,7 +21,6 @@ let settings = {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: true,
-        // dots: true,
       },
     },
     {
@@ -39,7 +41,34 @@ let settings = {
   ],
 };
 class Specialization extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSpecialty: [],
+    };
+  }
+  async componentDidMount() {
+    this.props.setIsLoadingRedux(true);
+    const res = await getSpecialty();
+    if (res.data.EC === 0) {
+      this.setState({
+        dataSpecialty: res.data.DT || [],
+      });
+      this.props.setIsLoadingRedux(false);
+    }
+  }
+  gotoDetail = (id) => {
+    if (this.props.history) {
+      this.props.history.push(`/detail-specialty/${id}`);
+    }
+  };
+  handleClickSpecialty = (id) => {
+    this.gotoDetail(id);
+  };
   render() {
+    let { dataSpecialty } = this.state;
+    console.log("dataSpecialty", dataSpecialty);
+    console.log(">>>>>>>>>check hoading:", this.props.isLoadingRedux);
     return (
       <div className="section-container">
         <div className="section-content">
@@ -55,41 +84,20 @@ class Specialization extends Component {
           </div>
           <div className="slick-container">
             <Slider {...settings}>
-              <div className="img-container">
-                <img
-                  src="https://4kwallpapers.com/images/walls/thumbs_2t/1271.jpg"
-                  alt=""
-                  className=""
-                />
-              </div>
-              <div className="img-container">
-                <img
-                  src="https://4kwallpapers.com/images/walls/thumbs_2t/1272.jpg"
-                  alt=""
-                  className=""
-                />
-              </div>
-              <div className="img-container">
-                <img
-                  src="https://4kwallpapers.com/images/walls/thumbs_2t/2330.jpg"
-                  alt=""
-                  className=""
-                />
-              </div>
-              <div className="img-container">
-                <img
-                  src="https://4kwallpapers.com/images/walls/thumbs_2t/1270.jpg"
-                  alt=""
-                  className=""
-                />
-              </div>
-              <div className="img-container">
-                <img
-                  src="https://4kwallpapers.com/images/walls/thumbs_2t/4120.png"
-                  alt=""
-                  className=""
-                />
-              </div>
+              {dataSpecialty &&
+                dataSpecialty.length > 0 &&
+                dataSpecialty.map((item, index) => {
+                  return (
+                    <div
+                      key={index}
+                      onClick={() => this.handleClickSpecialty(item.id)}>
+                      <div className="img-container">
+                        <img src={item.image} alt="" className="" />
+                      </div>
+                      <div className="mt-2 name-specialty">{item.name}</div>
+                    </div>
+                  );
+                })}
             </Slider>
           </div>
         </div>
@@ -99,11 +107,17 @@ class Specialization extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    isLoadingRedux: state.admin.isLoadingRedux,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    setIsLoadingRedux: (flag) => dispatch(fetchLoading(flag)),
+  };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialization);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Specialization)
+);

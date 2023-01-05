@@ -230,10 +230,6 @@ class ModalUserV2 extends Component {
                   <div className="overlay"></div>
                 </div>
               )}
-              <div className="title mb-3">
-                {" "}
-                <FormattedMessage id="menu.manage-user.manage-user"></FormattedMessage>
-              </div>
               <div className="user-body">
                 <div className="container-add">
                   <div className="row g-3">
@@ -414,13 +410,6 @@ class ModalUserV2 extends Component {
                         )}
                       </div>
                     </div>
-                    {/* <div
-                      className="col-12"
-                      onClick={() => this.handleSaveUser()}>
-                      <div className="btn btn-primary mt-2">
-                        <FormattedMessage id="menu.manage-user.createUser"></FormattedMessage>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
               </div>

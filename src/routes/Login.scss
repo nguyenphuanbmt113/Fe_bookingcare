@@ -92,6 +92,7 @@
                 margin-bottom: 0;     
                 &:focus, &:hover{
                     border: 3px solid $input-focus;
+                    background: rgb(199, 199, 199);
                 }
             }
             &.icon-true {

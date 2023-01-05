@@ -15,12 +15,14 @@ class MarkDown extends Component {
   };
   render() {
     return (
-      <MdEditor
-        style={{ height: "400px" }}
-        renderHTML={(text) => mdParser.render(text)}
-        onChange={this.handleEditorChange}
-        value={this.props?.contentMarkdown || ""}
-      />
+      <div className="">
+        <MdEditor
+          style={{ height: "400px" }}
+          renderHTML={(text) => mdParser.render(text)}
+          onChange={this.handleEditorChange}
+          value={this.props?.contentMarkdown || ""}
+        />
+      </div>
     );
   }
 }

@@ -64,6 +64,9 @@ const actionTypes = Object.freeze({
   //payment
   FETCH_PAYMENTDOCTOR_SUCCESS: "FETCH_PAYMENTDOCTOR_SUCCESS",
   FETCH_PAYMENTDOCTOR_FAIL: "FETCH_PAYMENTDOCTOR_FAIL",
+
+  //Loading
+  FETCH_LOADING: "FETCH_LOADING",
 });
 
 export default actionTypes;

@@ -4,6 +4,7 @@ import Select from "react-select";
 import "./DoctorSchedule.scss";
 import moment from "moment";
 import { getSchedulebyDate } from "../../../services/userService";
+import BookingModal from "./modal/BookingModal";
 require("moment/locale/fr.js");
 require("moment/min/locales.min");
 
@@ -14,8 +15,18 @@ class DoctorSchedule extends Component {
       selectedItem: "",
       allDay: [],
       allScheduleDetail: [],
+
+      //modal
+      isShowModal: false,
+      dataScheduleTimeModal: [],
     };
   }
+  //toggle modal
+  toggle = () => {
+    this.setState({
+      isShowModal: !this.state.isShowModal,
+    });
+  };
   //get arrday
   getAlldays = (lang) => {
     let arrDate = [];
@@ -42,13 +53,11 @@ class DoctorSchedule extends Component {
     this.setState({
       allDay: arrDays,
     });
-    console.log("arrDays", arrDays);
     if (arrDays && arrDays.length > 0) {
       const res = await getSchedulebyDate(
         this.props.doctorId,
         arrDays[0].value
       );
-      console.log("res", res);
       if (res.data.EC === 0) {
         this.setState({
           allScheduleDetail: res?.data?.DT,
@@ -72,10 +81,15 @@ class DoctorSchedule extends Component {
       });
     }
   };
-
+  //btn show modal
+  btnShowModal = (item) => {
+    this.setState({
+      isShowModal: true,
+      dataScheduleTimeModal: item,
+    });
+  };
   render() {
     const { allScheduleDetail } = this.state;
-    console.log("allScheduleDetail", allScheduleDetail);
     return (
       <>
         <div className="doctor-schedule-container">
@@ -99,7 +113,10 @@ class DoctorSchedule extends Component {
                 allScheduleDetail.length > 0 &&
                 allScheduleDetail.map((item, index) => {
                   return (
-                    <div className="btn-time" key={index}>
+                    <div
+                      className="btn-time"
+                      key={index}
+                      onClick={() => this.btnShowModal(item)}>
                       {this.props.lang === "vi"
                         ? item.timeTypeData.valueVi
                         : item.timeTypeData.valueEn}
@@ -114,6 +131,11 @@ class DoctorSchedule extends Component {
             </div>
           </div>
         </div>
+        <BookingModal
+          toggle={this.toggle}
+          closeBtn={this.close}
+          isShow={this.state.isShowModal}
+          dataTime={this.state.dataScheduleTimeModal}></BookingModal>
       </>
     );
   }

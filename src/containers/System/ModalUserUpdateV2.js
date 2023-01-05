@@ -229,10 +229,6 @@ class ModalUserUpdateV2 extends Component {
                   <div className="overlay"></div>
                 </div>
               )}
-              <div className="title mb-3">
-                {" "}
-                <FormattedMessage id="menu.manage-user.manage-user"></FormattedMessage>
-              </div>
               <div className="user-body">
                 <div className="container-add">
                   <div className="row g-3">

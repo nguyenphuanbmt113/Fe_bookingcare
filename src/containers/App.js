@@ -13,12 +13,14 @@ import {
 import { path } from "../utils";
 
 import Home from "../routes/Home";
-// import Login from "../routes/Login";
 import System from "../routes/System";
 import Login from "./Auth/Login";
 import HomePage from "./HomePage/HomePage";
 import DetailDoctor from "./Parient/Doctor/DetailDoctor";
 import Doctor from "../routes/Doctor";
+import VerifyEmail from "./Parient/VerifyEmail";
+import DetailSpecialty from "./Parient/Specialty/DetailSpecialty";
+import DetailClinic from "./System/Admin/Clinic/DetailClinic";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -40,6 +42,7 @@ class App extends Component {
   }
 
   render() {
+    const { isLoadingRedux } = this.props;
     return (
       <Fragment>
         <Router history={history}>
@@ -57,6 +60,15 @@ class App extends Component {
                 />
                 <Route path={path.HOMEPAGE} component={HomePage} />
                 <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
+                <Route
+                  path={path.DETAIL_SPECIALTY}
+                  component={DetailSpecialty}
+                />
+                <Route
+                  path={path.VERIFY_EMAIL_BOOKING}
+                  component={VerifyEmail}
+                />
                 <Route
                   path={path.DOCTOR}
                   component={userIsAuthenticated(Doctor)}

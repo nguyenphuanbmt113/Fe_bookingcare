@@ -1,5 +1,6 @@
 .top-container {
   margin-bottom: 20px;
+  padding: 0 20px;
 }
 .text-editor {
   width: 100%;
@@ -18,4 +19,7 @@
   height: 95vh;
   overflow-y: auto;
   border-radius: 8px;
+}
+.container-info {
+  padding: 0 20px;
 }

@@ -27,6 +27,7 @@
     },
     "doctor": {
       "manage-schedule": "Quản Lý Lịch Khám Bệnh",
+      "manage-patient": "Quản Lý Bệnh Nhân",
       "schedule": "Lịch Khám Bệnh"
     },
     "manage-user": {

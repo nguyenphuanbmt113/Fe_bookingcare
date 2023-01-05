@@ -4,8 +4,11 @@ export const path = {
   LOGIN: "/login",
   LOG_OUT: "/logout",
   SYSTEM: "/system",
-  DETAIL_DOCTOR: "/doctor/:id",
+  DETAIL_DOCTOR: "/detail-doctor/:id",
+  DETAIL_SPECIALTY: "/detail-specialty/:id",
+  DETAIL_CLINIC: "/detail-clinic/:id",
   DOCTOR: "/doctorAdmin",
+  VERIFY_EMAIL_BOOKING: "/verify-booking",
 };
 
 export const LANGUAGES = {

@@ -71,7 +71,6 @@ class ManageSchedule extends Component {
   };
   //handle date picker
   handleChangeData = (data) => {
-    console.log("data", data);
     this.setState({
       currentDate: data[0],
     });
@@ -101,7 +100,6 @@ class ManageSchedule extends Component {
       return;
     }
     let formateDate = new Date(currentDate).getTime().toString();
-    console.log("formateDate", formateDate);
     if (scheduleDoctor && scheduleDoctor.length > 0) {
       let selectedTime = scheduleDoctor.filter((item, index) => {
         return item.isActive === true;
@@ -118,18 +116,15 @@ class ManageSchedule extends Component {
         toast.error("Invalid selected time");
       }
     }
-    const bulkCreate = await saveBulkDoctor({
+    await saveBulkDoctor({
       result,
       doctorId: selectedDoctor.value,
       date: formateDate,
     });
-    console.log("bulkCreate", bulkCreate);
   };
 
   render() {
-    const { scheduleDoctor, currentDate } = this.state;
-    console.log("currentDate", currentDate);
-    console.log("scheduleDoctor", scheduleDoctor);
+    const { scheduleDoctor } = this.state;
     return (
       <>
         <div className="manage-schdule-container">

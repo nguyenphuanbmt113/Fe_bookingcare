@@ -12,7 +12,11 @@ import {
   fetchPrice,
   fetchProvice,
 } from "../../store/actions/adminActions";
-import { geteDetailInfoDoctor } from "../../services/userService";
+import {
+  getAllClinic,
+  geteDetailInfoDoctor,
+  getSpecialty,
+} from "../../services/userService";
 class ModalMarkDown extends Component {
   constructor(props) {
     super(props);
@@ -30,13 +34,19 @@ class ModalMarkDown extends Component {
       listPrice: [],
       listPayment: [],
       listProvice: [],
+      listClinic: [],
+      listSpecialty: [],
 
       selectPrice: "",
       selectPayment: "",
       selectProvice: "",
+      selectClinic: "",
+      selectSpecialty: "",
       nameClinic: "",
       nameAddress: "",
       note: "",
+      clinicId: "",
+      specialtyId: "",
     };
   }
   //handleSelect
@@ -63,15 +73,48 @@ class ModalMarkDown extends Component {
     });
     return options;
   };
-  //handleSelect province
-  //handleSelect payment
   //life circle
   componentDidMount() {
     this.props.getAllDoctor();
     this.props.getPriceDoctor();
     this.props.getProviceDoctor();
     this.props.getPaymentDoctor();
+    this.getAllSpecialty();
+    this.getAllClinic();
   }
+  //get all specialty
+  getAllSpecialty = async () => {
+    const res = await getSpecialty();
+    if (res?.data.EC === 0) {
+      const result = [];
+      res.data.DT.forEach((item, index) => {
+        const obj = {};
+        obj.label = item.name;
+        obj.value = item.id;
+        result.push(obj);
+      });
+      this.setState({
+        listSpecialty: result,
+      });
+    }
+  };
+  //get all clinic
+  getAllClinic = async () => {
+    const res = await getAllClinic();
+    console.log("all clinic", res);
+    if (res?.data.EC === 0) {
+      const result = [];
+      res.data.DT.forEach((item, index) => {
+        const obj = {};
+        obj.label = item.name;
+        obj.value = item.id;
+        result.push(obj);
+      });
+      this.setState({
+        listClinic: result,
+      });
+    }
+  };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.allDoctor !== this.props.allDoctor) {
       let dataSelected = this.handleSelect(this.props.allDoctor);
@@ -104,34 +147,63 @@ class ModalMarkDown extends Component {
         allDoctors: dataSelected,
       });
     }
-    // if (prevProps.isCorrectSaveInfo !== this.props.isCorrectSaveInfo) {
-    //   this.toggle();
-    // }
   }
+
   //select options
   handleChange = async (selectedDoctor) => {
-    console.log("selectedDoctor", selectedDoctor);
     this.setState({
       selectedDoctor,
     });
     const res = await geteDetailInfoDoctor(selectedDoctor.value);
-    console.log("res", res);
-    if (res?.data?.EC === 0 && res.data?.DT && res.data?.DT?.Markdown) {
+    if (res?.data?.EC === 0 && res.data?.DT) {
+      //find item for feature selected
+      const { listPrice, listPayment, listProvice, listSpecialty, listClinic } =
+        this.state;
       let markdown = res.data?.DT?.Markdown;
-      console.log("markdown", markdown);
-      this.setState({
-        contentHTML: markdown.contentHTML,
-        contentMarkdown: markdown.contentMarkdown,
-        description: markdown?.description,
-        oldData: true,
-      });
-    } else {
-      this.setState({
-        contentHTML: "",
-        contentMarkdown: "",
-        description: "",
-        oldData: false,
-      });
+      let result = !Object.values(markdown).every((o) => o === null);
+      if (result === true) {
+        this.setState({
+          contentHTML: markdown.contentHTML,
+          contentMarkdown: markdown.contentMarkdown,
+          description: markdown?.description,
+          oldData: true,
+        });
+      } else {
+        this.setState({
+          contentHTML: "",
+          contentMarkdown: "",
+          description: "",
+          oldData: false,
+        });
+      }
+      let findItemPayment = listPayment.find(
+        (item) => item.value === res.data.DT.Doctor_Infor.paymentId
+      );
+      let findItemPrice = listPrice.find(
+        (item) => item.value === res.data.DT.Doctor_Infor.priceId
+      );
+      let findItemProvince = listProvice.find(
+        (item) => item.value === res.data.DT.Doctor_Infor.proviceId
+      );
+      let findItemSpecialty = listSpecialty.find(
+        (item) => item.value === res.data.DT.Doctor_Infor.specialtyId
+      );
+      let findItemClinic = listClinic.find(
+        (item) => item.value === res.data.DT.Doctor_Infor.clinicId
+      );
+      console.log("findItemSpecialty", findItemSpecialty);
+      if (res.data.DT.Doctor_Infor) {
+        this.setState({
+          nameClinic: res.data.DT.Doctor_Infor.nameClinic,
+          nameAddress: res.data.DT.Doctor_Infor.addressClinic,
+          note: res.data.DT.Doctor_Infor.note,
+          selectPrice: findItemPrice,
+          selectPayment: findItemPayment,
+          selectProvice: findItemProvince,
+          selectSpecialty: findItemSpecialty,
+          selectClinic: findItemClinic,
+        });
+      }
     }
   };
   //select price
@@ -140,10 +212,24 @@ class ModalMarkDown extends Component {
       selectPrice: selectedChose,
     });
   };
+  //handle specialty
+  handleChangeSpecialty = (selectedChose) => {
+    console.log("selectedChose", selectedChose);
+    this.setState({
+      selectSpecialty: selectedChose,
+    });
+    console.log("selectSpecialty:", this.state.selectSpecialty);
+  };
   //select provice
   handleChangeProvince = (selectedChose) => {
     this.setState({
       selectProvice: selectedChose,
+    });
+  };
+  //select Clinic
+  handleChangeClinic = (selectedChose) => {
+    this.setState({
+      selectClinic: selectedChose,
     });
   };
   //select payment
@@ -169,6 +255,7 @@ class ModalMarkDown extends Component {
   };
   //handleSubmit
   handleSubmit = () => {
+    console.log(">>check:", this.state.selectSpecialty.value);
     this.props.saveInfoDoctor({
       doctorId: this.state.selectedDoctor.value,
       contentHTML: this.state.contentHTML,
@@ -181,13 +268,13 @@ class ModalMarkDown extends Component {
       nameClinic: this.state.nameClinic,
       nameAddress: this.state.nameAddress,
       note: this.state.note,
+      clinicId: this.state.selectClinic?.value,
+      specialtyId: this.state.selectSpecialty.value,
     });
   };
   //handle Onchange input
   handleChangeInput = (e, id) => {
-    console.log("name", id);
     let stateCopy = { ...this.state };
-    console.log("stateCopy", stateCopy);
     stateCopy[id] = e.target.value;
     this.setState({
       ...stateCopy,
@@ -195,13 +282,9 @@ class ModalMarkDown extends Component {
   };
   render() {
     const { oldData } = this.state;
-    const { arrPrice, arrProvice, arrPayment } = this.props;
-    console.log("arrPayment", arrPayment);
-    console.log("arrProvice", arrProvice);
-    console.log("arrPrice", arrPrice);
     return (
       <Modal
-        dialogClassName="modal"
+        dialoglassname="modal"
         isOpen={this.props.isShow}
         // isOpen={true}
         toggle={() => this.toggle()}
@@ -211,7 +294,7 @@ class ModalMarkDown extends Component {
           Thêm Thông tin Cho Bác Sĩ
         </ModalHeader>
         <ModalBody>
-          <div className="top-container flex flex-column">
+          <div className="mt-2 top-container flex flex-column">
             <div className="mb-2">Chọn Bác Sĩ</div>
             <div className="col-12">
               <Select
@@ -260,6 +343,25 @@ class ModalMarkDown extends Component {
               />
             </div>
             <div className="form-group col-4 mb-3">
+              <label className="mb-1">Chọn Phòng Khám</label>
+              <Select
+                placeholder={"Choose Clinic"}
+                value={this.state.selectClinic}
+                onChange={this.handleChangeClinic}
+                options={this.state.listClinic}
+              />
+            </div>
+            <div className="form-group col-4 mb-3">
+              <label className="mb-1">Tên Chuyên Khoa</label>
+              <Select
+                placeholder={"Choose Specialty"}
+                value={this.state.selectSpecialty}
+                onChange={this.handleChangeSpecialty}
+                options={this.state.listSpecialty}
+              />
+            </div>
+
+            <div className="form-group col-4 mb-3">
               <label className="mb-1">Địa chỉ phòng khám</label>
               <input
                 type="email"
@@ -279,22 +381,24 @@ class ModalMarkDown extends Component {
             </div>
           </div>
 
-          <div className="flex">
+          <div className="px-4 flex">
             <div className="mb-2">Mô Tả Thông Tin Bác Sĩ</div>
             <div className="col-12 mb-3">
               <textarea
                 rows="4"
                 cols="50"
-                value={this.state.description || ""}
+                value={this.state?.description || ""}
                 onChange={(e) => this.handleChangetextarea(e)}
                 className="text-editor"
                 placeholder="Description"></textarea>
             </div>
           </div>
-          <MarkDown
-            setContent={this.setContent}
-            contentMarkdown={this.state.contentMarkdown}></MarkDown>
-          <div className="mt-4">
+          <div className="px-4">
+            <MarkDown
+              setContent={this.setContent}
+              contentMarkdown={this.state.contentMarkdown}></MarkDown>
+          </div>
+          <div className="p-4 mt-4">
             <Button
               color="primary"
               className="px-3"
