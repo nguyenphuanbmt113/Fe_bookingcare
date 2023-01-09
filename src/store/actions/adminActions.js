@@ -136,7 +136,6 @@ export const fetchAllUser = () => {
     }
   };
 };
-
 //update action
 export const fetchUpdateUserSuceess = () => ({
   type: actionTypes.FETCH_UPDATEUSER_SUCCESS,

@@ -3,33 +3,18 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { deleteUser } from "../../../services/userService";
 import { fetchAllUser } from "../../../store/actions/adminActions";
-import ReactPaginate from "react-paginate";
 import "./TableUser.scss";
 class TableUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
       users: [],
-      // page: 1,
-      // limit: 2,
-      // totalPage: 0,
     };
   }
   async componentDidMount() {
-    // this.props.getUserPara({ limit: this.state.limit, page: this.state.page });
     this.props.getAllUser();
   }
   componentDidUpdate(prevProps) {
-    // if (prevProps.usersDataPara !== this.props.usersDataPara) {
-    //   this.setState({
-    //     users: this.props.usersDataPara,
-    //   });
-    // }
-    // if (prevProps.totalPage !== this.props.totalPage) {
-    //   this.setState({
-    //     totalPage: this.props.totalPage,
-    //   });
-    // }
     if (prevProps.usersData !== this.props.usersData) {
       this.setState({
         users: this.props.usersData,

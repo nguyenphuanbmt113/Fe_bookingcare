@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import TableClinic from "../Specialty/TableClinic";
 import "./ManageClinic.scss";
 import ModalClinic from "./ModalClinic";
 class ManageClinic extends Component {
@@ -25,16 +26,21 @@ class ManageClinic extends Component {
     return (
       <>
         <div className="manage-specialty-container">
-          <div className="ms-title">Quản Lý Phòng Phám</div>
-          <div
-            className="btn-addnew-specialty"
-            onClick={() => this.handleOpenModal()}>
-            Create Clinic
+          <div className="top-specialy">
+            <div className="ms-title">Quản Lý Phòng Phám</div>
+            <div
+              className="btn-addnew-specialty"
+              onClick={() => this.handleOpenModal()}>
+              Create Clinic
+            </div>
           </div>
           <div className="all-specialty"></div>
           <ModalClinic
             isShow={this.state.isShowModal}
             toggle={this.toggle}></ModalClinic>
+          <div className="custom-margin">
+            <TableClinic></TableClinic>
+          </div>
         </div>
       </>
     );
