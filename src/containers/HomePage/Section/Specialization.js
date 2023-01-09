@@ -67,8 +67,6 @@ class Specialization extends Component {
   };
   render() {
     let { dataSpecialty } = this.state;
-    console.log("dataSpecialty", dataSpecialty);
-    console.log(">>>>>>>>>check hoading:", this.props.isLoadingRedux);
     return (
       <div className="section-container">
         <div className="section-content">

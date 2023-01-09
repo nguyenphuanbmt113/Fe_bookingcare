@@ -7,11 +7,13 @@ import { connect } from "react-redux";
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 import "./ModalUser.scss";
 import {
+  fetchAllUser,
   fetchCreateUser,
   fetchGenderStart,
   fetchPositionStart,
   fetchRoleStart,
   fetchUpdateUser,
+  fetchUserParameter,
 } from "../../store/actions/adminActions";
 import CommonUtils from "../../utils/CommonUtils";
 class ModalUserUpdateV2 extends Component {
@@ -35,6 +37,8 @@ class ModalUserUpdateV2 extends Component {
       firstName: "",
       lastName: "",
       image: "",
+      limit: 3,
+      page: 1,
     };
   }
   //component did mount
@@ -117,7 +121,6 @@ class ModalUserUpdateV2 extends Component {
     for (let i = 0; i < arrInput.length; i++) {
       if (!this.state[arrInput[i]]) {
         isValid = false;
-        console.log(arrInput[i]);
         alert("Missing parameter: ", arrInput[i]);
         break;
       }
@@ -193,7 +196,8 @@ class ModalUserUpdateV2 extends Component {
         lastName: this.state.lastName,
         image: this.state.image,
       });
-      this.props.toggle();
+      // this.props.getAllUser();
+      // this.props.toggle();
     }
   };
   //toggle
@@ -442,6 +446,9 @@ const mapDispatchToProps = (dispatch) => {
     getPositionStart: () => dispatch(fetchPositionStart()),
     createUser: (data) => dispatch(fetchCreateUser(data)),
     updateUser: (data) => dispatch(fetchUpdateUser(data)),
+
+    getUserPara: (query) => dispatch(fetchUserParameter(query)),
+    getAllUser: () => dispatch(fetchAllUser()),
   };
 };
 

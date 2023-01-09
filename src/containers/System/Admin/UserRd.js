@@ -3,7 +3,6 @@ import "react-image-lightbox/style.css";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { fetchCreateUser } from "../../../store/actions/adminActions";
-import MarkDown from "../MarkDown";
 import ModalMarkDown from "../ModalMarkDown";
 import ModalUserUpdateV2 from "../ModalUserUpdateV2";
 import ModalUserV2 from "../ModalUserV2";
@@ -59,15 +58,10 @@ class UserRd extends Component {
     return (
       <>
         <div className="container-header-manage">
-          <div className="title-header mb-1">
-            <FormattedMessage id="menu.manage-user.manage-user"></FormattedMessage>
-          </div>
+          <div className="title-header mb-1">QUẢN LÝ TẤT CẢ NGƯỜI DÙNG</div>
           <div>
             <button onClick={() => this.toggle()} className="btn-add mr-2">
               <FormattedMessage id="menu.manage-user.Create-User"></FormattedMessage>
-            </button>
-            <button className="btn-add" onClick={() => this.toggleMarkDown()}>
-              Mark Down
             </button>
           </div>
         </div>

@@ -11,16 +11,6 @@ import IntroApp from "./Section/IntroApp";
 import MedicalFacility from "./Section/MedicalFacility";
 import Specialization from "./Section/Specialization";
 class HomePage extends Component {
-  // componentDidMount() {
-  //   window.scrollTo(0, 0);
-  // }
-  // componentDidUpdate = (prevProps) => {
-  //   if (this.props.location !== prevProps.location) {
-  //     console.log("chay");
-  //     window.scrollTo(0, 0);
-  //   }
-  // };
-
   render() {
     return (
       <>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./IntroApp.scss";
+import quanglinh from "../../../assets/image/ql.jpg";
 class IntroApp extends Component {
   render() {
     // const { systemMenuPath } = this.props;
@@ -8,19 +9,16 @@ class IntroApp extends Component {
       <div className="intro-wrap">
         <div className="intro-container">
           <div className="content-left">
-            <img
-              src="https://4kwallpapers.com/images/walls/thumbs/3273.jpg"
-              alt=""
-            />
+            <img src={quanglinh} alt="" />
           </div>
           <div className="content-right">
             <h2>Tải ứng dụng BookingCare</h2>
-            <ul class="app-feature">
+            <ul className="app-feature">
               <li>Đặt khám nhanh hơn</li>
               <li>Nhận thông báo từ hệ thống</li>
               <li>Nhận hướng dẫn đi khám chi tiết</li>
             </ul>
-            <a class="app-link-auto" href="https://bookingcare.vn/app">
+            <a className="app-link-auto" href="https://bookingcare.vn/app">
               Hoặc mở liên kết: <strong>https://bookingcare.vn/app</strong>
             </a>
             <div className="logo-container">

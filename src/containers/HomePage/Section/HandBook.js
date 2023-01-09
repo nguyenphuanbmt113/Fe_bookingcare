@@ -3,6 +3,9 @@ import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import "../HomePage.scss";
 import Slider from "react-slick";
+import camnang1 from "../../../assets/image/cam-nang-1.jpg";
+import camnang2 from "../../../assets/image/cam-nang-2.jpg";
+import camnang3 from "../../../assets/image/cam-nang-3.png";
 let settings = {
   // dots: true,
   infinite: true,
@@ -56,38 +59,26 @@ class HandBook extends Component {
               <Slider {...settings}>
                 <div className="handbook-content">
                   <div className="handbook-image">
-                    <img
-                      src="https://images.unsplash.com/photo-1671394033488-a3ce85f1076a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMXx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=60"
-                      alt=""
-                      className=""
-                    />
+                    <img src={camnang1} alt="" className="" />
                   </div>
                   <div className="handlebook-title">
-                    8 địa chỉ khám Cơ Xương Khớp uy tín tại TPHCM (Phần 2)
+                    8 địa chỉ khám bệnh Da liễu uy tín tại TP HCM
                   </div>
                 </div>
                 <div className="handbook-content">
                   <div className="handbook-image">
-                    <img
-                      src="https://images.unsplash.com/photo-1671394033488-a3ce85f1076a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMXx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=60"
-                      alt=""
-                      className=""
-                    />
+                    <img src={camnang2} alt="" className="" />
                   </div>
                   <div className="handlebook-title">
-                    8 địa chỉ khám Cơ Xương Khớp uy tín tại TPHCM (Phần 2)
+                    Review Top 5 địa chỉ điều trị nám da uy tín tại TP.HCM
                   </div>
                 </div>
                 <div className="handbook-content">
                   <div className="handbook-image">
-                    <img
-                      src="https://images.unsplash.com/photo-1671394033488-a3ce85f1076a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMXx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=60"
-                      alt=""
-                      className=""
-                    />
+                    <img src={camnang3} alt="" className="" />
                   </div>
                   <div className="handlebook-title">
-                    8 địa chỉ khám Cơ Xương Khớp uy tín tại TPHCM (Phần 2)
+                    Top 8 bác sĩ thần kinh giỏi và uy tín TPHCM (phần 2)
                   </div>
                 </div>
               </Slider>

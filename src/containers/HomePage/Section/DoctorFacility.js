@@ -65,6 +65,7 @@ class DoctorFacility extends Component {
   };
   render() {
     const { topDoctorData } = this.state;
+    console.log("topDoctorData", topDoctorData);
     return (
       <div className="section-container section-doctor">
         <div className="section-content">
@@ -86,6 +87,7 @@ class DoctorFacility extends Component {
                   let nameVi = `${item.positionData.valueVi}, ${item.firstName} ${item.lastName}`;
                   let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
                   let imageBase64 = "";
+                  let doctor_specialty = item.Doctor_Infor.SpecialtyData.name;
                   if (item.image) {
                     imageBase64 = new Buffer(item.image, "base64").toString(
                       "binary"
@@ -102,6 +104,7 @@ class DoctorFacility extends Component {
                       <div className="title-doctor">
                         {this.props.lang === "vi" ? nameVi : nameEn}
                       </div>
+                      <div className="doctor_specialty">{doctor_specialty}</div>
                     </div>
                   );
                 })}

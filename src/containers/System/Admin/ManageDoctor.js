@@ -10,6 +10,7 @@ import ModalUserV2 from "../ModalUserV2";
 // import ModalUserV2 from "../ModalUserV2";
 import "./UserRd.scss";
 import "./ManageDoctor.scss";
+import TableDoctor from "./TableDoctor";
 class ManageDoctor extends Component {
   constructor(props) {
     super(props);
@@ -71,9 +72,7 @@ class ManageDoctor extends Component {
             </button>
           </div>
         </div>
-        <div className="container-markdown">
-          <MarkDown></MarkDown>
-        </div>
+        <TableDoctor></TableDoctor>
         {this.state.isShow === true && (
           <ModalUserV2
             isShow={this.state.isShow}

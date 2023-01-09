@@ -1,11 +1,12 @@
+import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getClinicByQuery } from "../../../../services/userService";
 import Header from "../../../HomePage/Header";
-import "./DetailClinic.scss";
-import _ from "lodash";
+import Footer from "../../../HomePage/Section/Footer";
+import DoctorScheduleV2 from "../../../Parient/Doctor/DoctorScheduleV2";
 import ProfileDoctorV2 from "../../../Parient/Specialty/ProfileDoctorV2";
-import DoctorSchedule from "../../../Parient/Doctor/DoctorSchedule";
+import "./DetailClinic.scss";
 class DetailClinic extends Component {
   constructor(props) {
     super(props);
@@ -44,18 +45,25 @@ class DetailClinic extends Component {
   }
   render() {
     const { detailClinic, arrDoctorId } = this.state;
+    console.log("detailClinic", detailClinic)
     return (
-      <div className=" detail-clinic">
+      <div className="detail-clinic">
         <div>
           <Header></Header>
         </div>
-        <div>
-          {detailClinic && !_.isEmpty(detailClinic) && (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: detailClinic?.descriptionHTML,
-              }}></div>
-          )}
+        <div className="image-container">
+          {/* <div className="overlay"></div> */}
+          <img src={detailClinic.image} alt="" className="" />
+        </div>
+        <div className="desc-wrap">
+          <div className="desc-container">
+            {detailClinic && !_.isEmpty(detailClinic) && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: detailClinic?.descriptionHTML,
+                }}></div>
+            )}
+          </div>
         </div>
         <div className="detail-clinic-wrap">
           {arrDoctorId &&
@@ -67,15 +75,19 @@ class DetailClinic extends Component {
                     <ProfileDoctorV2 doctorId={item}></ProfileDoctorV2>
                   </div>
                   <div className="content-right">
-                    <DoctorSchedule doctorId={item}></DoctorSchedule>
+                    <DoctorScheduleV2 doctorId={item}></DoctorScheduleV2>
                   </div>
                 </div>
               );
             })}
 
-          {arrDoctorId && arrDoctorId.length === 0 && <div>Khong co</div>}
+          {arrDoctorId && arrDoctorId.length === 0 && (
+            <div className="alert alert-danger no-data">
+              Không có Bác Sĩ nào thuộc phòng phám này
+            </div>
+          )}
         </div>
-        <div className="h-10"></div>
+        <Footer></Footer>
       </div>
     );
   }

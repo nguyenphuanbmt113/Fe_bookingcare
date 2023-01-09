@@ -61,7 +61,6 @@ class MedicalFacility extends Component {
     this.props.history.push(`detail-clinic/${item.id}`);
   };
   render() {
-    console.log("listClinic", this.state.listClinic);
     const { listClinic } = this.state;
     return (
       <>

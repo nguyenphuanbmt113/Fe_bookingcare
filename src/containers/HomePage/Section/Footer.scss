@@ -1,6 +1,4 @@
 .footer-wrap {
-  // border     : 1px solid red;
-  // background : rgb(182, 229, 255);
   background : ghostwhite;
 
   .footer-container {
@@ -17,6 +15,10 @@
       display        : flex;
       flex-direction : column;
       gap            : 21px;
+
+      .strong {
+        font-weight : 600;
+      }
     }
 
     .content-mid {
@@ -36,9 +38,11 @@
 
       // color: #f5f5f5;
       h2 {
-        font-weight : bold;
-        margin      : 5px 0;
-        font-size   : 20px;
+        font-weight     : bold;
+        margin          : 5px 0;
+        font-size       : 20px;
+        // color       : rgb(255, 45, 30);
+        color           : #1a90ff;
       }
 
       p {
@@ -46,14 +50,14 @@
       }
 
       .logo-container {
-        margin-top: 20px;
+        margin-top  : 20px;
         display     : flex;
         align-items : center;
         gap         : 20px;
 
         .img-container {
-          width  : 40px;
-          height : 40px;
+          width  : 30px;
+          height : 30px;
 
           img {
             width      : 100%;
@@ -62,6 +66,15 @@
           }
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .footer-wrap {
+    .footer-container {
+      height                : auto;
+      grid-template-columns : 1fr;
     }
   }
 }

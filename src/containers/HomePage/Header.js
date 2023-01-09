@@ -4,10 +4,16 @@ import { connect } from "react-redux";
 import { changeLanguage } from "../../store/actions/appActions";
 import { LANGUAGES } from "../../utils/constant";
 import { withRouter } from "react-router";
+import * as actions from "../../store/actions";
 import "./Header.scss";
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isShowNavbar: false,
+    };
+  }
   handleChangeLanguage = (language) => {
-    //fire redux action
     this.props.setChangeLanguage(language);
   };
   componentDidMount() {
@@ -29,19 +35,46 @@ class Header extends Component {
       this.props.history.push("/home");
     }
   };
+  handleLogin = () => {
+    if (this.props.history) {
+      this.props.history.push("/login");
+    }
+  };
+  // /showNavbar
+  showNavbar = () => {
+    this.setState({
+      isShowNavbar: true,
+    });
+  };
+  closeNavbar = () => {
+    this.setState({
+      isShowNavbar: false,
+    });
+  };
   render() {
-    const lang = this.props.lang;
+    const { processLogout } = this.props;
     return (
       <>
         <div className="home-header-container">
           <div className="home-header-content">
             <div className="left-content">
-              <i className="fas fa-bars"></i>
+              <i
+                className="fas fa-bars hambuger"
+                onClick={() => this.showNavbar()}></i>
               <div
                 className="header-logo"
                 onClick={() => this.returnToHome()}></div>
             </div>
-            <div className="mid-content">
+            <div
+              className={`${
+                this.state.isShowNavbar
+                  ? "mid-content isactive"
+                  : "mid-content noactive"
+              }`}>
+              <div className="logo-mobile"></div>
+              <i
+                className="far fa-times-circle delete-icon"
+                onClick={() => this.closeNavbar()}></i>
               <div className="child-content">
                 <div className="txt-bold">
                   {" "}
@@ -83,30 +116,24 @@ class Header extends Component {
               </div>
             </div>
             <div className="right-content">
-              <span
-                onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}
-                className={`cursor img-flag ${lang === "vi" && "active-flag"}`}>
-                <img
-                  src="https://png.pngtree.com/png-clipart/20210725/original/pngtree-irregular-dry-ink-brush-vietnam-flag-png-image_6563885.jpg"
-                  alt=""
-                />
-              </span>
-              <span
-                onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}
-                className={`cursor img-flag ${lang === "en" && "active-flag"}`}>
-                <img
-                  src="https://banner2.cleanpng.com/20180623/iwt/kisspng-flag-of-the-united-kingdom-flag-of-great-britain-e-northern-ireland-flags-issue-5b2efb1c7a74b4.9896211915298055965016.jpg"
-                  alt=""
-                />
-              </span>
               <div className="txt-help img-flag">
-                {" "}
-                {/* <FormattedMessage id="header.Support"></FormattedMessage> */}
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgbVIUlkVzZcItcnTiJDMkFw49AhfDepQ61ekj6sUY98IhWOckopYUIsN2g1R2p3NACv4&usqp=CAU"
                   alt=""
                 />
               </div>
+              {this.props.isLoggedIn === false ? (
+                <div className="login" onClick={() => this.handleLogin()}>
+                  Đăng Nhập
+                </div>
+              ) : (
+                <div
+                  className="btn btn-logout"
+                  onClick={processLogout}
+                  title="Logout">
+                  <i className="fas fa-sign-out-alt"></i>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -215,6 +242,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setChangeLanguage: (language) => dispatch(changeLanguage(language)),
+    processLogout: () => dispatch(actions.processLogout()),
   };
 };
 

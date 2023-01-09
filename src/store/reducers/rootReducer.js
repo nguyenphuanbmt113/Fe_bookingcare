@@ -35,6 +35,7 @@ export default (history) =>
   combineReducers({
     router: connectRouter(history),
     admin: adminReducer,
+    // user: userReducer,
     user: persistReducer(userPersistConfig, userReducer),
     app: persistReducer(appPersistConfig, appReducer),
     // app: appReducer,

@@ -3,10 +3,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   getAllcodesBytype,
-  getSpecialtyByQuery,
+  getSpecialtyByQuery
 } from "../../../services/userService";
 import Header from "../../HomePage/Header";
-import DoctorSchedule from "../Doctor/DoctorSchedule";
+import DoctorScheduleV2 from "../Doctor/DoctorScheduleV2";
 import "./DetailSpecialty.scss";
 import ProfileDoctorV2 from "./ProfileDoctorV2";
 class DetailSpecialty extends Component {
@@ -50,7 +50,6 @@ class DetailSpecialty extends Component {
           arrDoctorId: arrDoctorId,
           listProvince: [allProvince, ...res2.data.DT],
         });
-        console.log("arrDoctorId", arrDoctorId);
       }
     }
   }
@@ -63,16 +62,13 @@ class DetailSpecialty extends Component {
       this.props.match.params.id
     ) {
       let location = e.target.value;
-      console.log("location", location);
+
       let { id } = this.props.match.params;
       let res = await getSpecialtyByQuery(id, location);
-      console.log("res", res);
       if (res.data.EC === 0) {
         let data = res.data.DT;
-        console.log(">>>>>>>>>>>>>>>>>>>data", data);
         let arrDoctorId = [];
         if (data && !_.isEmpty(data)) {
-          console.log("asd");
           let arr = data.SpecialtyData;
           if (arr && arr.length > 0) {
             arr.forEach((item, index) => {
@@ -83,25 +79,23 @@ class DetailSpecialty extends Component {
         this.setState({
           arrDoctorId: arrDoctorId,
         });
-        console.log("arrDoctorId:", arrDoctorId);
       }
     }
   };
   render() {
     let { arrDoctorId, dataDetailSpecialty, listProvince } = this.state;
-    console.log("dataDetailSpecialty", dataDetailSpecialty);
-    console.log(">>>>>>>>>>>chcek enm oi arrDoctorId", arrDoctorId);
-    console.log("....", dataDetailSpecialty?.SpecialtyData?.addressClinic);
     return (
       <div className="detail-specialty">
         <Header></Header>
-        <div className="infor-specialty">
-          {dataDetailSpecialty && !_.isEmpty(dataDetailSpecialty) && (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: dataDetailSpecialty?.descriptionHTML,
-              }}></div>
-          )}
+        <div className="infor-specialty-wrap">
+          <div className="infor-specialty">
+            {dataDetailSpecialty && !_.isEmpty(dataDetailSpecialty) && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: dataDetailSpecialty?.descriptionHTML,
+                }}></div>
+            )}
+          </div>
         </div>
         <div className="filter-doctor">
           <select onChange={(e) => this.handleChangeLocation(e)}>
@@ -126,7 +120,7 @@ class DetailSpecialty extends Component {
                     <ProfileDoctorV2 doctorId={item}></ProfileDoctorV2>
                   </div>
                   <div className="content-right">
-                    <DoctorSchedule doctorId={item}></DoctorSchedule>
+                    <DoctorScheduleV2 doctorId={item}></DoctorScheduleV2>
                   </div>
                 </div>
               );

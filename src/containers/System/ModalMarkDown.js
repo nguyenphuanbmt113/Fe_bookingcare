@@ -101,7 +101,6 @@ class ModalMarkDown extends Component {
   //get all clinic
   getAllClinic = async () => {
     const res = await getAllClinic();
-    console.log("all clinic", res);
     if (res?.data.EC === 0) {
       const result = [];
       res.data.DT.forEach((item, index) => {
@@ -191,7 +190,6 @@ class ModalMarkDown extends Component {
       let findItemClinic = listClinic.find(
         (item) => item.value === res.data.DT.Doctor_Infor.clinicId
       );
-      console.log("findItemSpecialty", findItemSpecialty);
       if (res.data.DT.Doctor_Infor) {
         this.setState({
           nameClinic: res.data.DT.Doctor_Infor.nameClinic,
@@ -214,11 +212,9 @@ class ModalMarkDown extends Component {
   };
   //handle specialty
   handleChangeSpecialty = (selectedChose) => {
-    console.log("selectedChose", selectedChose);
     this.setState({
       selectSpecialty: selectedChose,
     });
-    console.log("selectSpecialty:", this.state.selectSpecialty);
   };
   //select provice
   handleChangeProvince = (selectedChose) => {
@@ -255,7 +251,6 @@ class ModalMarkDown extends Component {
   };
   //handleSubmit
   handleSubmit = () => {
-    console.log(">>check:", this.state.selectSpecialty.value);
     this.props.saveInfoDoctor({
       doctorId: this.state.selectedDoctor.value,
       contentHTML: this.state.contentHTML,

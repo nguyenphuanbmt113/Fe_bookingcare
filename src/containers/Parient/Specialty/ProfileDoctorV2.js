@@ -19,7 +19,6 @@ class ProfileDoctorV2 extends Component {
   }
   //life circle
   async componentDidMount() {
-    console.log("mounting");
     let data = await this.getInforDoctor(this.props.doctorId);
     let data2 = await this.getExtraInforDoctor(this.props.doctorId);
     this.setState({
@@ -30,8 +29,6 @@ class ProfileDoctorV2 extends Component {
   //life circle update
   async componentDidUpdate(prevProps, prevState) {
     if (prevProps.doctorId !== this.props.doctorId) {
-      console.log("did update");
-      console.log("doctorId", this.props.doctorId);
       const data = await this.getInforDoctor(this.props.doctorId);
       this.setState({
         dataProfile: data,
@@ -47,7 +44,6 @@ class ProfileDoctorV2 extends Component {
       let res = await getProfileDoctorInforById(id);
       if (res && res.data.EC === 0) {
         result = res.data.DT;
-        console.log("result", result);
       }
     }
     return result;

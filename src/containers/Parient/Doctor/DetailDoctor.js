@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { geteDetailInfoDoctor } from "../../../services/userService";
 import Header from "../../HomePage/Header";
+import Footer from "../../HomePage/Section/Footer";
 import DoctorExtraInfor from "../../System/Doctor/DoctorExtraInfor";
 import "./Doctor.scss";
 import DoctorSchedule from "./DoctorSchedule";
@@ -65,15 +66,16 @@ class DetailDoctor extends Component {
                 doctorId={this.props.match.params.id}></DoctorExtraInfor>
             </div>
           </div>
+        </div>
+        <div className="detail-info-doctor-container">
           <div className="detail-info-doctor mt-3">
             <div
               dangerouslySetInnerHTML={{
                 __html: detailDoctor?.Markdown?.contentHTML,
               }}></div>
           </div>
-
-          <div className="comment-doctor"></div>
         </div>
+        <Footer></Footer>
       </>
     );
   }

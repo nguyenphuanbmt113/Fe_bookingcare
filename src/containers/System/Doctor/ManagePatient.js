@@ -59,7 +59,6 @@ class ManagePatient extends Component {
   };
   //handleConfirm
   handleConfirm = (item) => {
-    console.log(">>>>>>>>>data: ", item);
     let data = {
       doctorId: item.doctorId,
       patientId: item.patientId,
@@ -75,7 +74,6 @@ class ManagePatient extends Component {
   };
   //handleSendFee
   handleRemedy = async (data) => {
-    console.log(">>>>>>>>>>parent:", data);
     this.setState({
       isLoading: true,
     });

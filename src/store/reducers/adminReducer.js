@@ -5,6 +5,10 @@ const initialState = {
   positionData: [],
   roleData: [],
   usersData: [],
+  totalPage: 0,
+  usersDataPara: [],
+  doctorsDataPara: [],
+  totalPageDoctors: 0,
   isLoadingGender: false,
   idLoadingSave: false,
   topDoctor: [],
@@ -144,6 +148,30 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoadingRedux: action.flag,
+      };
+    case actionTypes.FETCH_USER_PARAREMER_SUCCESS:
+      console.log("ac", action);
+      return {
+        ...state,
+        usersDataPara: action.data.rows,
+        totalPage: action.data.count,
+      };
+    case actionTypes.FETCH_USER_PARAREMER_FAIL:
+      return {
+        ...state,
+        usersDataPara: [],
+      };
+    case actionTypes.FETCH_DOCTOR_PARAREMER_SUCCESS:
+      console.log(">>>>>>>>>>>>>>>", action);
+      return {
+        ...state,
+        doctorsDataPara: action.data.rows,
+        totalPageDoctors: action.data.count,
+      };
+    case actionTypes.FETCH_DOCTOR_PARAREMER_FAIL:
+      return {
+        ...state,
+        doctorsDataPara: [],
       };
 
     default:

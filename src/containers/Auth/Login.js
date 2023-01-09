@@ -36,7 +36,7 @@ class Login extends Component {
           errorMess: res.data.EM,
         });
       } else {
-        this.props.userLoginSuccess(res.data.DT);
+        this.props.userLoginSuccess(res.data.DT.res);
       }
     } catch (error) {
       this.setState({

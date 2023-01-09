@@ -82,8 +82,15 @@ const getAllPatientForDoctor = (doctorId, date) => {
 const postSendRemedy = (data) => {
   return axios.post(`api/v1/send-remedy`, data);
 };
-
+const userParameter = ({ limit, page }) => {
+  return axios.get(`api/v1/user-parameter?limit=${limit}&page=${page}`);
+};
+const doctorParameter = ({ limit, page }) => {
+  return axios.get(`api/v1/doctor-parameter?limit=${limit}&page=${page}`);
+};
 export {
+  doctorParameter,
+  userParameter,
   postSendRemedy,
   getAllPatientForDoctor,
   getClinicByQuery,

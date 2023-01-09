@@ -104,7 +104,6 @@ class BookingModal extends Component {
         .locale("en")
         .format("ddd - MM/DD/YYYY");
       const date = lang === "vi" ? formattedTimeVi : formattedTimeEn;
-      console.log("date", date);
       const time =
         lang === "vi"
           ? dataTime.timeTypeData.valueVi

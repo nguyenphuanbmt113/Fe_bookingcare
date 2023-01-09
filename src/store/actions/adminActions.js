@@ -6,6 +6,8 @@ import {
   getTopDoctorHome,
   getAllDoctor,
   saveInfoDoctor,
+  userParameter,
+  doctorParameter,
 } from "../../services/userService";
 import actionTypes from "./actionTypes";
 import { toast } from "react-toastify";
@@ -124,7 +126,7 @@ export const fetchAllUser = () => {
     try {
       const res = await handleGetAllUser();
       if (res?.data?.EC === 0) {
-        let users = res.data?.data.reverse();
+        let users = res.data?.DT.reverse();
         dispatch(fetchAllUserSuceess(users));
       } else {
         dispatch(fetchAllUserFail());
@@ -335,3 +337,54 @@ export const fetchLoading = (flag) => ({
   type: actionTypes.FETCH_LOADING,
   flag,
 });
+
+//user-parameter
+export const fetchUserParameterSucess = (data) => ({
+  type: actionTypes.FETCH_USER_PARAREMER_SUCCESS,
+  data,
+});
+export const fetchUserParameterFail = (data) => ({
+  type: actionTypes.FETCH_USER_PARAREMER_FAIL,
+  data,
+});
+export const fetchUserParameter = (query) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await userParameter(query);
+      if (res?.data.EC === 0) {
+        dispatch(fetchUserParameterSucess(res?.data?.DT));
+      } else {
+        dispatch(fetchUserParameterFail());
+      }
+    } catch (error) {
+      dispatch(fetchPaymentFail());
+      console.log(">>checek err:", error);
+    }
+  };
+};
+
+//doctor-parameter
+export const fetchDoctorParameterSucess = (data) => ({
+  type: actionTypes.FETCH_DOCTOR_PARAREMER_SUCCESS,
+  data,
+});
+export const fetchDoctorParameterFail = (data) => ({
+  type: actionTypes.FETCH_DOCTOR_PARAREMER_FAIL,
+  data,
+});
+export const fetchDoctorParameter = (query) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await doctorParameter(query);
+      console.log("res doctor", res);
+      if (res?.data.EC === 0) {
+        dispatch(fetchDoctorParameterSucess(res?.data?.DT));
+      } else {
+        dispatch(fetchDoctorParameterFail());
+      }
+    } catch (error) {
+      dispatch(fetchPaymentFail());
+      console.log(">>checek err:", error);
+    }
+  };
+};

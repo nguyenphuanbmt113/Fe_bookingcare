@@ -47,7 +47,6 @@ class ModalSpecialty extends Component {
   };
   //handleImageSpecialty
   handleImageSpecialty = async (e) => {
-    console.log(e.target.files);
     let imageBase64 = await this.toBase64(e.target.files[0]);
     this.setState({
       imagePreview: imageBase64,
@@ -56,24 +55,15 @@ class ModalSpecialty extends Component {
   };
   //handleSubmit
   handleSubmit = async () => {
-    console.log("this.state:", this.state);
     const res = await createNewSpecialty(this.state);
     if (res.data.EC === 0) {
       toast.success(res.data.EM);
       this.toggle();
-      // this.setState({
-      //   contentHTML: "",
-      //   contentMarkdown: "",
-      //   specialtyName: "",
-      //   imageBase64: "",
-      //   imagePreview: "",
-      // });
     } else {
       toast.error(res.data.EM);
     }
   };
   render() {
-    console.log("this.props.isShow:", this.props.isShow);
     return (
       <Modal
         dialoglassname="modal"

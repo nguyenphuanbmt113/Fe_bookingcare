@@ -1,7 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import { withRouter } from "react-router";
 import Navigator from "../../components/Navigator";
 import * as actions from "../../store/actions";
 import { changeLanguage } from "../../store/actions";
@@ -31,6 +31,11 @@ class Header extends Component {
       if (role === USER_ROLE.DOCTOR) {
         menu = doctorMenu;
       }
+      if (role === USER_ROLE.PATIENT) {
+        if (this.props.history) {
+          this.props.history.push("/home");
+        }
+      }
     }
     this.setState({
       menuApp: menu,
@@ -46,28 +51,6 @@ class Header extends Component {
         </div>
         {/* language */}
         <div className="header-left">
-          <div className="language">
-            <span
-              className={`img-flag ${
-                this.props.lang === "vi" && "active-flag"
-              }`}
-              onClick={() => this.handleChangeLanguage(LANGUAGES.VI)}>
-              <img
-                src="https://png.pngtree.com/png-clipart/20210725/original/pngtree-irregular-dry-ink-brush-vietnam-flag-png-image_6563885.jpg"
-                alt=""
-              />
-            </span>
-            <span
-              className={`img-flag ${
-                this.props.lang === "en" && "active-flag"
-              }`}
-              onClick={() => this.handleChangeLanguage(LANGUAGES.EN)}>
-              <img
-                src="https://banner2.cleanpng.com/20180623/iwt/kisspng-flag-of-the-united-kingdom-flag-of-great-britain-e-northern-ireland-flags-issue-5b2efb1c7a74b4.9896211915298055965016.jpg"
-                alt=""
-              />
-            </span>
-          </div>
           {/* nút logout */}
           <div
             className="btn btn-logout"
@@ -96,4 +79,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

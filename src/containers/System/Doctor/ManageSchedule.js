@@ -116,11 +116,23 @@ class ManageSchedule extends Component {
         toast.error("Invalid selected time");
       }
     }
-    await saveBulkDoctor({
+    const res = await saveBulkDoctor({
       result,
       doctorId: selectedDoctor.value,
       date: formateDate,
     });
+    if (res.data.EC === 0) {
+      toast.success(res.data.EM);
+      const no_active = this.state.scheduleDoctor.map((item) => {
+        item.isActive = false;
+        return item
+      });
+      this.setState({
+        selectedDoctor: "",
+        currentDate: "",
+        scheduleDoctor: no_active,
+      });
+    }
   };
 
   render() {
@@ -139,6 +151,7 @@ class ManageSchedule extends Component {
               </div>
               <div>
                 <Select
+                  placeholder={"Choose Doctor"}
                   value={this.state.selectedDoctor}
                   onChange={this.handleChange}
                   options={this.state.allDoctors}
@@ -152,6 +165,7 @@ class ManageSchedule extends Component {
               </div>
               <div>
                 <DatePicker
+                  placeholder={"Choose Date"}
                   onChange={(data) => this.handleChangeData(data)}
                   className="form-control"
                   value={this.state.currentDate}></DatePicker>

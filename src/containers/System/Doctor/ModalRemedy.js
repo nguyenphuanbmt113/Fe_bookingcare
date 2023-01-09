@@ -43,10 +43,8 @@ class ModalRemedy extends Component {
   //handlePickImage
   handlePickImage = async (e) => {
     let file = e.target.files[0];
-    console.log("file", file);
     if (file) {
       let base64 = await CommonUtils.getBase64(file);
-      console.log("base64", base64);
       const imgPrev = URL.createObjectURL(file);
       this.setState({
         imagePreview: imgPrev,
@@ -68,7 +66,6 @@ class ModalRemedy extends Component {
   };
   render() {
     const { dataModal } = this.props;
-    console.log(">>>>>>>>>>>>>>>check lu dataModal", dataModal);
     return (
       <>
         <Modal

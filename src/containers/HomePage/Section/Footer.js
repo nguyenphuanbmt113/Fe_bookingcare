@@ -70,15 +70,15 @@ class Footer extends Component {
           </div>
           <div className="content-right">
             <div>
-              <div>Trụ sở tại Hà Nội</div>
+              <div className="strong">Trụ sở tại Hà Nội</div>
               <div>28 Thành Thái, Dịch Vọng, Cầu Giấy, Hà Nội</div>
             </div>
             <div>
-              <div>Văn phòng tại TP Hồ Chí Minh</div>
+              <div className="strong">Văn phòng tại TP Hồ Chí Minh</div>
               <div>Số 01, Hồ Bá Kiện, Phường 15, Quận 10</div>
             </div>
             <div>
-              <div>Hỗ trợ khách hàng</div>
+              <div className="strong">Hỗ trợ khách hàng</div>
               <div>support@bookingcare.vn (7h - 18h)</div>
             </div>
           </div>
