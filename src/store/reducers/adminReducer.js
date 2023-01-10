@@ -22,6 +22,7 @@ const initialState = {
   arrProvice: [],
   //isloadinh
   isLoadingRedux: true,
+  isLoadinggDoctor: true,
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -74,10 +75,17 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case actionTypes.FETCH_TOPDOCTOR_START:
+      state.usersData = [];
+      return {
+        ...state,
+        isLoadinggDoctor: true,
+      };
     case actionTypes.FETCH_TOPDOCTOR_SUCCESS:
       return {
         ...state,
         topDoctor: action.data,
+        isLoadinggDoctor: false,
       };
     case actionTypes.FETCH_TOPDOCTOR_FAIL:
       return {

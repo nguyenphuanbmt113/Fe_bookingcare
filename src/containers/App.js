@@ -3,25 +3,25 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { history } from "../redux";
 import "react-toastify/dist/ReactToastify.css";
 import {
   userIsAuthenticated,
   userIsNotAuthenticated,
 } from "../hoc/authentication";
+import { history } from "../redux";
 
 import { path } from "../utils";
 
+import Doctor from "../routes/Doctor";
 import Home from "../routes/Home";
 import System from "../routes/System";
 import Login from "./Auth/Login";
 import HomePage from "./HomePage/HomePage";
 import DetailDoctor from "./Parient/Doctor/DetailDoctor";
-import Doctor from "../routes/Doctor";
-import VerifyEmail from "./Parient/VerifyEmail";
 import DetailSpecialty from "./Parient/Specialty/DetailSpecialty";
+import VerifyEmail from "./Parient/VerifyEmail";
 import DetailClinic from "./System/Admin/Clinic/DetailClinic";
-
+import { RotatingTriangles } from "react-loader-spinner";
 class App extends Component {
   handlePersistorState = () => {
     const { persistor } = this.props;
@@ -42,9 +42,8 @@ class App extends Component {
   }
 
   render() {
-    const { isLoadingRedux } = this.props;
     return (
-      <Fragment>
+      <div className="full-wrap">
         <Router history={history}>
           <div className="main-container">
             <span className="content-container">
@@ -89,7 +88,7 @@ class App extends Component {
             />
           </div>
         </Router>
-      </Fragment>
+      </div>
     );
   }
 }

@@ -161,6 +161,10 @@ export const fetchUpdateUser = (data) => {
 };
 
 //getdoctorhhome
+
+export const fetTopDoctorStart = () => ({
+  type: actionTypes.FETCH_TOPDOCTOR_START,
+});
 export const fetTopDoctorSuccess = (data) => ({
   type: actionTypes.FETCH_TOPDOCTOR_SUCCESS,
   data,
@@ -170,6 +174,7 @@ export const fetTopDoctorFail = () => ({
 });
 export const fetchTopDoctorHome = (limit) => {
   return async (dispatch, getState) => {
+    dispatch(fetTopDoctorStart());
     try {
       const res = await getTopDoctorHome(limit);
       console.log("res", res);

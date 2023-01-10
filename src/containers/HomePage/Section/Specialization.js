@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import "../HomePage.scss";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import { FormattedMessage } from "react-intl";
-import { getSpecialty } from "../../../services/userService";
+import { ColorRing } from "react-loader-spinner";
+import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import { getSpecialty } from "../../../services/userService";
 import { fetchLoading } from "../../../store/actions/adminActions";
-// import { RotatingTriangles } from "react-loader-spinner";
+import "../HomePage.scss";
 let settings = {
   infinite: true,
   speed: 500,
@@ -45,16 +45,21 @@ class Specialization extends Component {
     super(props);
     this.state = {
       dataSpecialty: [],
+      isLoadingSpecialty: false,
     };
   }
   async componentDidMount() {
-    this.props.setIsLoadingRedux(true);
+    this.setState({
+      isLoadingSpecialty: true,
+    });
     const res = await getSpecialty();
     if (res.data.EC === 0) {
       this.setState({
         dataSpecialty: res.data.DT || [],
       });
-      this.props.setIsLoadingRedux(false);
+      this.setState({
+        isLoadingSpecialty: false,
+      });
     }
   }
   gotoDetail = (id) => {
@@ -97,6 +102,28 @@ class Specialization extends Component {
                   );
                 })}
             </Slider>
+            {this.state.isLoadingSpecialty === true && (
+              <div className="loading-container">
+                <div className="loading">
+                  <ColorRing
+                    visible={true}
+                    height="50"
+                    width="50"
+                    ariaLabel="rotating-triangels-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="rotating-triangels-wrapper"
+                    colors={[
+                      "#ffffff",
+                      "#ffffff",
+                      "#ffffff",
+                      "#ffffff",
+                      "#ffffff",
+                    ]}
+                  />
+                </div>
+                <div className="overlay"></div>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import { FormattedMessage } from "react-intl";
 import { fetchTopDoctorHome } from "../../../store/actions/adminActions";
 import { withRouter } from "react-router";
+import { ColorRing } from "react-loader-spinner";
 let settings = {
   // dots: true,
   infinite: true,
@@ -66,6 +67,7 @@ class DoctorFacility extends Component {
   render() {
     const { topDoctorData } = this.state;
     console.log("topDoctorData", topDoctorData);
+    console.log(">>>>", this.props.isLoadinggDoctor);
     return (
       <div className="section-container section-doctor">
         <div className="section-content">
@@ -109,6 +111,28 @@ class DoctorFacility extends Component {
                   );
                 })}
             </Slider>
+            {this.state.isLoadinggDoctor === true && (
+              <div className="loading-container">
+                <div className="loading">
+                  <ColorRing
+                    visible={true}
+                    height="50"
+                    width="50"
+                    ariaLabel="rotating-triangels-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="rotating-triangels-wrapper"
+                    colors={[
+                      "#ffffff",
+                      "#ffffff",
+                      "#ffffff",
+                      "#ffffff",
+                      "#ffffff",
+                    ]}
+                  />
+                </div>
+                <div className="overlay"></div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -119,6 +143,7 @@ class DoctorFacility extends Component {
 const mapStateToProps = (state) => {
   return {
     topDoctor: state.admin.topDoctor,
+    isLoadinggDoctor: state.admin.isLoadinggDoctor,
     lang: state.app.language,
   };
 };
